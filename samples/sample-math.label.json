@@ -1,0 +1,8 @@
+{
+  "expected_types": ["mixed", "text", "mixed"],
+  "expected_blocks": [
+    { "type": "text" },
+    { "type": "text" },
+    { "type": "image" }
+  ]
+}

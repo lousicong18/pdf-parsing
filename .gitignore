@@ -1,0 +1,22 @@
+# Sensitive config (API keys)
+.env
+models.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+
+# Task store (runtime data)
+.task_store.json
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# OS
+.DS_Store

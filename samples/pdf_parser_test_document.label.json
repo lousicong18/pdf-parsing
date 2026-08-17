@@ -1,0 +1,15 @@
+{
+  "expected_types": ["text", "mixed", "table", "table", "mixed", "mixed", "text", "text", "text", "text"],
+  "expected_blocks": [
+    { "type": "text" },
+    { "type": "table" },
+    { "type": "table" },
+    { "type": "table" },
+    { "type": "text" },
+    { "type": "text" },
+    { "type": "text" },
+    { "type": "text" },
+    { "type": "text" },
+    { "type": "text" }
+  ]
+}

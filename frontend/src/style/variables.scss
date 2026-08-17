@@ -1,0 +1,37 @@
+$color-primary: #409eff;
+$color-success: #67c23a;
+$color-warning: #e6a23c;
+$color-danger: #f56c6c;
+$color-info: #909399;
+
+$color-background: #ffffff;
+$color-background-secondary: rgb(250, 250, 250);
+
+$color-text: #303133;
+$color-text-secondary: #606266;
+$color-text-placeholder: #c0c4cc;
+
+$color-border: #e4e7ed;
+$color-border-light: #ebeef5;
+$color-border-lighter: #f2f6fc;
+$color-divider: #dcdfe6;
+
+$shadow-card: 0 2px 12px rgba(0, 0, 0, 0.08);
+$shadow-light: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+$aside-width: 220px;
+$header-height: 60px;
+$border-radius: 6px;
+$border-radius-sm: 4px;
+$border-radius-lg: 10px;
+
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 12px;
+$spacing-lg: 16px;
+$spacing-xl: 24px;
+
+:root {
+  --el-color-primary: #{$color-primary};
+  --el-border-radius-base: #{$border-radius};
+}

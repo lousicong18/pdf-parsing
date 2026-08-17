@@ -1,0 +1,18 @@
+{
+  "expected_types": ["mixed", "table", "table", "table", "mixed", "mixed", "mixed", "mixed", "table", "mixed", "mixed", "table", "mixed"],
+  "expected_blocks": [
+    { "type": "image" },
+    { "type": "table" },
+    { "type": "table" },
+    { "type": "table" },
+    { "type": "image" },
+    { "type": "image" },
+    { "type": "image" },
+    { "type": "text" },
+    { "type": "table" },
+    { "type": "text" },
+    { "type": "text" },
+    { "type": "table" },
+    { "type": "image" }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "classification": {
+    "overall": 0.0,
+    "total": 1,
+    "correct": 0,
+    "per_type": {
+      "text": 0.0
+    }
+  },
+  "confusion_matrix": {
+    "labels": [
+      "text",
+      "table",
+      "mixed",
+      "scan"
+    ],
+    "matrix": [
+      [
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "feature_distribution": {
+    "mixed": {
+      "count": 1,
+      "line_count": 37.0,
+      "area_ratio": 0.0194732807199292,
+      "overlap_rate": 0.0,
+      "char_density": 0.008877924279992223,
+      "orthogonality": 0.0,
+      "drawings_path_count": 42.0,
+      "columns": 3.0
+    }
+  },
+  "table_backend_compare": {
+    "pdfplumber": {
+      "accuracy": 0.0,
+      "total": 0,
+      "matched": 0
+    },
+    "camelot": {
+      "accuracy": 0.0,
+      "total": 0,
+      "matched": 0
+    }
+  },
+  "vlm_cost": {
+    "total_cost": 0.0,
+    "total_latency_ms": 0,
+    "by_kind": {},
+    "calls": 0
+  },
+  "badcases": [
+    {
+      "index": 1,
+      "expected": {
+        "type": "table",
+        "n_rows": 5,
+        "n_cols": 4
+      },
+      "actual": {
+        "type": "text",
+        "bbox": [
+          78.0,
+          293.0199890136719,
+          207.8920135498047,
+          312.2980041503906
+        ],
+        "page_type": "mixed",
+        "order": 1,
+        "text": "I2IIIIII4I4II",
+        "table": null,
+        "image": null,
+        "content": "I2IIIIII4I4II",
+        "image_url": null
+      },
+      "match": false
+    },
+    {
+      "index": 2,
+      "expected": {
+        "type": "table",
+        "n_rows": 4,
+        "n_cols": 4
+      },
+      "actual": {
+        "type": "text",
+        "bbox": [
+          78.0,
+          431.01995849609375,
+          218.5460205078125,
+          450.2979736328125
+        ],
+        "page_type": "mixed",
+        "order": 2,
+        "text": "I3IIIIIII8I5II",
+        "table": null,
+        "image": null,
+        "content": "I3IIIIIII8I5II",
+        "image_url": null
+      },
+      "match": false
+    },
+    {
+      "index": 3,
+      "expected": {
+        "type": "table",
+        "n_rows": 9,
+        "n_cols": 5
+      },
+      "actual": {
+        "type": "text",
+        "bbox": [
+          215.93280029296875,
+          458.25,
+          379.3427734375,
+          471.989990234375
+        ],
+        "page_type": "mixed",
+        "order": 3,
+        "text": "I1\nI2\nI3\nI4\nI5",
+        "table": null,
+        "image": null,
+        "content": "I1\nI2\nI3\nI4\nI5",
+        "image_url": null
+      },
+      "match": false
+    }
+  ],
+  "vlm_model_compare": {}
+}

@@ -1,0 +1,32 @@
+[project]
+name = "pdf-parser-demo"
+version = "0.1.0"
+description = "PDF 图文混排解析 Demo (precision-first + evaluation platform)"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "pymupdf",
+    "pdfplumber",
+    "httpx",
+    "python-multipart",
+    "pydantic",
+    "python-dotenv",
+    "camelot-py[cv]>=2.0.0",
+    "reportlab>=5.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[project.scripts]
+pdf-parser-demo = "src.server:main"

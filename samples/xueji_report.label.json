@@ -1,0 +1,7 @@
+{
+  "expected_types": ["table"],
+  "expected_blocks": [
+    { "type": "table", "n_rows": 15, "n_cols": 2 },
+    { "type": "table", "n_rows": 7, "n_cols": 1 }
+  ]
+}

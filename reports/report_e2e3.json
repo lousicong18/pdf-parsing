@@ -1,0 +1,111 @@
+{
+  "classification": {
+    "overall": 0.4117647058823529,
+    "total": 17,
+    "correct": 7,
+    "per_type": {
+      "text": 0.1111111111111111,
+      "mixed": 0.5,
+      "table": 1.0
+    }
+  },
+  "confusion_matrix": {
+    "labels": [
+      "text",
+      "table",
+      "mixed",
+      "scan"
+    ],
+    "matrix": [
+      [
+        1,
+        8,
+        0,
+        0
+      ],
+      [
+        0,
+        4,
+        0,
+        0
+      ],
+      [
+        0,
+        2,
+        2,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "feature_distribution": {
+    "text": {
+      "count": 1,
+      "line_count": 3.0,
+      "area_ratio": 0.006790795128224528,
+      "overlap_rate": 0.0,
+      "char_density": 0.006153818558912826,
+      "orthogonality": 0.0,
+      "drawings_path_count": 3.0,
+      "columns": 2.0
+    },
+    "mixed": {
+      "count": 2,
+      "line_count": 13.5,
+      "area_ratio": 0.019871175214984372,
+      "overlap_rate": 0.0,
+      "char_density": 0.008233406019348471,
+      "orthogonality": 0.0,
+      "drawings_path_count": 22.0,
+      "columns": 2.0
+    },
+    "table": {
+      "count": 14,
+      "line_count": 12.571428571428571,
+      "area_ratio": 0.019050758555419878,
+      "overlap_rate": 0.0,
+      "char_density": 0.009598373060095663,
+      "orthogonality": 0.0,
+      "drawings_path_count": 20.714285714285715,
+      "columns": 1.4285714285714286
+    }
+  },
+  "table_backend_compare": {},
+  "vlm_cost": {
+    "total_cost": 0.0,
+    "total_latency_ms": 0,
+    "by_kind": {},
+    "calls": 0
+  },
+  "badcases": [
+    {
+      "index": 2,
+      "expected": {
+        "type": "image"
+      },
+      "actual": {
+        "type": "text",
+        "bbox": [
+          62.692909240722656,
+          104.49368286132812,
+          430.1929016113281,
+          114.99368286132812
+        ],
+        "page_type": "mixed",
+        "order": 2,
+        "text": "字体嵌入，属文字层内容；解析器应原样保留这些符号而非误判为图片或乱码。",
+        "table": null,
+        "image": null,
+        "content": "字体嵌入，属文字层内容；解析器应原样保留这些符号而非误判为图片或乱码。",
+        "image_url": null
+      },
+      "match": false
+    }
+  ],
+  "vlm_model_compare": {}
+}

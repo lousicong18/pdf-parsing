@@ -1,0 +1,148 @@
+@use 'variables' as *;
+
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: $spacing-xl;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: $color-text;
+  margin: 0 0 $spacing-lg 0;
+}
+
+.card {
+  background: $color-background;
+  border-radius: $border-radius;
+  border: 1px solid $color-border;
+  box-shadow: $shadow-card;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-lg;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  margin-bottom: $spacing-lg;
+}
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  margin-bottom: $spacing-md;
+}
+
+.empty-state {
+  text-align: center;
+  padding: $spacing-xl * 2;
+  color: $color-text-secondary;
+}
+
+.upload-zone {
+  border: 2px dashed $color-border;
+  border-radius: $border-radius-lg;
+  padding: $spacing-xl;
+  text-align: center;
+  transition: border-color 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $color-primary;
+  }
+}
+
+.action-bar {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  margin-top: $spacing-lg;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: $spacing-md;
+}
+
+.el-table-wrapper {
+  border: 1px solid $color-border;
+  border-radius: $border-radius;
+  overflow: hidden;
+}
+
+.status-bar {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  flex-wrap: wrap;
+}
+
+.page-card {
+  @extend .card;
+}
+
+.block-item {
+  padding: $spacing-md 0;
+  border-bottom: 1px solid $color-border-lighter;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.block-meta {
+  margin-top: $spacing-sm;
+  font-size: 12px;
+  color: $color-text-secondary;
+  display: flex;
+  gap: $spacing-md;
+  align-items: center;
+}
+
+.struct-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    border: 1px solid $color-border;
+    padding: $spacing-sm $spacing-md;
+    text-align: left;
+    font-size: 13px;
+  }
+
+  th {
+    background: $color-background-secondary;
+    font-weight: 600;
+  }
+}
+
+.features-bar {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  flex-wrap: wrap;
+  margin: $spacing-sm 0;
+  font-size: 12px;
+}
+
+.metrics-panel {
+  @extend .card;
+}
+
+.json-viewer {
+  background: $color-background-secondary;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-sm;
+  padding: $spacing-md;
+  font-family: monospace;
+  font-size: 12px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 400px;
+  overflow-y: auto;
+}

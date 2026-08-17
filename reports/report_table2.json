@@ -1,0 +1,254 @@
+{
+  "classification": {
+    "overall": 0.0,
+    "total": 1,
+    "correct": 0,
+    "per_type": {
+      "text": 0.0
+    }
+  },
+  "confusion_matrix": {
+    "labels": [
+      "text",
+      "table",
+      "mixed",
+      "scan"
+    ],
+    "matrix": [
+      [
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "feature_distribution": {
+    "table": {
+      "count": 1,
+      "line_count": 37.0,
+      "area_ratio": 0.0194732807199292,
+      "overlap_rate": 0.0,
+      "char_density": 0.008877924279992223,
+      "orthogonality": 0.0,
+      "drawings_path_count": 42.0,
+      "columns": 3.0
+    }
+  },
+  "table_backend_compare": {
+    "pdfplumber": {
+      "accuracy": 0.0,
+      "total": 3,
+      "matched": 0
+    },
+    "camelot": {
+      "accuracy": 0.0,
+      "total": 3,
+      "matched": 0
+    }
+  },
+  "vlm_cost": {
+    "total_cost": 0.0,
+    "total_latency_ms": 0,
+    "by_kind": {},
+    "calls": 0
+  },
+  "badcases": [
+    {
+      "index": 0,
+      "expected": {
+        "type": "text"
+      },
+      "actual": {
+        "type": "table",
+        "bbox": [
+          241.98780000000002,
+          162.0,
+          353.2878,
+          252.0
+        ],
+        "page_type": "table",
+        "order": 0,
+        "text": null,
+        "table": {
+          "rows": [
+            [
+              "nn",
+              "nn",
+              "nn",
+              "nn"
+            ],
+            [
+              "nn",
+              "25",
+              "nn",
+              "90"
+            ],
+            [
+              "nn",
+              "30",
+              "nn",
+              "85"
+            ],
+            [
+              "nn",
+              "28",
+              "nn",
+              "92"
+            ],
+            [
+              "nn",
+              "35",
+              "nn",
+              "88"
+            ]
+          ],
+          "n_rows": 5,
+          "n_cols": 4,
+          "merged": [],
+          "cross_page": false,
+          "bbox": [
+            241.98780000000002,
+            162.0,
+            353.2878,
+            252.0
+          ]
+        },
+        "image": null,
+        "content": "| nn | nn | nn | nn |\n| --- | --- | --- | --- |\n| nn | 25 | nn | 90 |\n| nn | 30 | nn | 85 |\n| nn | 28 | nn | 92 |\n| nn | 35 | nn | 88 |",
+        "image_url": null
+      },
+      "match": false
+    },
+    {
+      "index": 2,
+      "expected": {
+        "type": "table",
+        "n_rows": 4,
+        "n_cols": 4
+      },
+      "actual": {
+        "type": "table",
+        "bbox": [
+          203.7378,
+          456.0,
+          391.5378,
+          618.0
+        ],
+        "page_type": "table",
+        "order": 2,
+        "text": null,
+        "table": {
+          "rows": [
+            [
+              "n1",
+              "n2",
+              "n3",
+              "n4",
+              "n5"
+            ],
+            [
+              "R1C1",
+              "R1C2",
+              "R1C3",
+              "R1C4",
+              "R1C5"
+            ],
+            [
+              "R2C1",
+              "R2C2",
+              "R2C3",
+              "R2C4",
+              "R2C5"
+            ],
+            [
+              "R3C1",
+              "R3C2",
+              "R3C3",
+              "R3C4",
+              "R3C5"
+            ],
+            [
+              "R4C1",
+              "R4C2",
+              "R4C3",
+              "R4C4",
+              "R4C5"
+            ],
+            [
+              "R5C1",
+              "R5C2",
+              "R5C3",
+              "R5C4",
+              "R5C5"
+            ],
+            [
+              "R6C1",
+              "R6C2",
+              "R6C3",
+              "R6C4",
+              "R6C5"
+            ],
+            [
+              "R7C1",
+              "R7C2",
+              "R7C3",
+              "R7C4",
+              "R7C5"
+            ],
+            [
+              "R8C1",
+              "R8C2",
+              "R8C3",
+              "R8C4",
+              "R8C5"
+            ]
+          ],
+          "n_rows": 9,
+          "n_cols": 5,
+          "merged": [],
+          "cross_page": false,
+          "bbox": [
+            203.7378,
+            456.0,
+            391.5378,
+            618.0
+          ]
+        },
+        "image": null,
+        "content": "| n1 | n2 | n3 | n4 | n5 |\n| --- | --- | --- | --- | --- |\n| R1C1 | R1C2 | R1C3 | R1C4 | R1C5 |\n| R2C1 | R2C2 | R2C3 | R2C4 | R2C5 |\n| R3C1 | R3C2 | R3C3 | R3C4 | R3C5 |\n| R4C1 | R4C2 | R4C3 | R4C4 | R4C5 |\n| R5C1 | R5C2 | R5C3 | R5C4 | R5C5 |\n| R6C1 | R6C2 | R6C3 | R6C4 | R6C5 |\n| R7C1 | R7C2 | R7C3 | R7C4 | R7C5 |\n| R8C1 | R8C2 | R8C3 | R8C4 | R8C5 |",
+        "image_url": null
+      },
+      "match": false
+    },
+    {
+      "index": 3,
+      "expected": {
+        "type": "table",
+        "n_rows": 9,
+        "n_cols": 5
+      },
+      "actual": null,
+      "match": false
+    }
+  ],
+  "vlm_model_compare": {}
+}
