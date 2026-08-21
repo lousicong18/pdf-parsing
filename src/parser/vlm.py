@@ -151,13 +151,15 @@ def _calc_cost(model: str, prompt_tokens: int, completion_tokens: int) -> float:
     return input_cost + output_cost
 
 
-def vlm_describe(image_bytes: bytes, metrics_ctx, model_name: Optional[str] = None) -> str:
-    return _call_vlm(image_bytes, DESCRIBE_PROMPT, metrics_ctx, model_name, kind="image")
+def vlm_describe(image_bytes: bytes, metrics_ctx, model_name: Optional[str] = None,
+                 prompt: Optional[str] = None) -> str:
+    return _call_vlm(image_bytes, prompt or DESCRIBE_PROMPT, metrics_ctx, model_name, kind="image")
 
 
-def vlm_describe_chart(image_bytes: bytes, metrics_ctx, model_name: Optional[str] = None) -> str:
+def vlm_describe_chart(image_bytes: bytes, metrics_ctx, model_name: Optional[str] = None,
+                       prompt: Optional[str] = None) -> str:
     """专门用于解析图表（散点图、柱状图等）的 VLM 调用。"""
-    return _call_vlm(image_bytes, CHART_PROMPT, metrics_ctx, model_name, kind="chart")
+    return _call_vlm(image_bytes, prompt or CHART_PROMPT, metrics_ctx, model_name, kind="chart")
 
 
 def vlm_ocr(image_bytes: bytes, metrics_ctx, model_name: Optional[str] = None) -> str:

@@ -200,17 +200,14 @@ def _vlm_detect_table(page, task_id: str, page_num: int, metrics_ctx=None) -> bo
     if env.CLS_VLM_FALLBACK != "on":
         return False
     try:
-        from src.vlm import vlm_describe
+        from src.parser.vlm import vlm_describe
         from src.utils import pdf_utils
         img_bytes = pdf_utils.page_to_png(page, dpi=100)
         resp = vlm_describe(
-            image_bytes=img_bytes,
+            img_bytes, metrics_ctx,
             prompt="这是PDF的一页。请判断此页面是否包含表格结构（有线或无线的行列对齐数据）。只回答 yes 或 no。",
-            model_name="",
-            metrics_ctx=metrics_ctx,
-            kind="probe",
         )
-        return resp.content.strip().lower().startswith("yes") if resp and resp.content else False
+        return resp.strip().lower().startswith("yes") if resp else False
     except Exception:
         return False
 

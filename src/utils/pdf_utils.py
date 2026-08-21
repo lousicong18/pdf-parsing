@@ -37,3 +37,10 @@ def get_page_count(pdf_path: str) -> int:
 def remove_temp_pdf(pdf_path: str) -> None:
     if pdf_path and os.path.exists(pdf_path):
         os.remove(pdf_path)
+
+
+def page_to_png(page, dpi: int = 150) -> bytes:
+    """Render a fitz Page to PNG bytes."""
+    mat = fitz.Matrix(dpi / 72, dpi / 72)
+    pix = page.get_pixmap(matrix=mat)
+    return pix.tobytes("png")

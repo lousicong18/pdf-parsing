@@ -13,7 +13,7 @@ def _open(pdf_path):
 class TestClassifyFeatures:
     def test_returns_page_features(self, text_pdf):
         doc = _open(text_pdf)
-        feats = classify_features(doc.load_page(0))
+        feats, raw = classify_features(doc.load_page(0))
         doc.close()
         assert feats is not None
         assert feats.text_blocks_count >= 1
@@ -21,7 +21,7 @@ class TestClassifyFeatures:
 
     def test_features_fields_populated(self, text_pdf):
         doc = _open(text_pdf)
-        feats = classify_features(doc.load_page(0))
+        feats, raw = classify_features(doc.load_page(0))
         doc.close()
         assert isinstance(feats.line_count, int)
         assert isinstance(feats.area_ratio, float)
@@ -33,41 +33,43 @@ class TestClassifyFeatures:
 class TestClassifyPage:
     def test_text_page_classified(self, text_pdf):
         doc = _open(text_pdf)
-        page_type, feats = classify_page(doc.load_page(0))
+        page_type, feats, log, raw = classify_page(doc.load_page(0))
         doc.close()
         assert page_type in ("text", "table", "mixed", "scan")
         assert feats is not None
+        assert isinstance(log, list)
+        assert raw is not None
 
     def test_table_page_classified(self, table_pdf):
         doc = _open(table_pdf)
-        page_type, feats = classify_page(doc.load_page(0))
+        page_type, feats, log, raw = classify_page(doc.load_page(0))
         doc.close()
         assert page_type in ("text", "table", "mixed", "scan")
         assert feats is not None
 
     def test_mixed_page_classified(self, mixed_pdf):
         doc = _open(mixed_pdf)
-        page_type, feats = classify_page(doc.load_page(0))
+        page_type, feats, log, raw = classify_page(doc.load_page(0))
         doc.close()
         assert page_type in ("text", "table", "mixed", "scan")
 
     def test_scan_page_classified(self, scan_pdf):
         doc = _open(scan_pdf)
-        page_type, feats = classify_page(doc.load_page(0))
+        page_type, feats, log, raw = classify_page(doc.load_page(0))
         doc.close()
         assert page_type in ("text", "table", "mixed", "scan")
 
     def test_prev_type_context(self, text_pdf):
         doc = _open(text_pdf)
-        p1, _ = classify_page(doc.load_page(0))
-        p2, _ = classify_page(doc.load_page(0), prev_type=p1)
+        p1, _, _, _ = classify_page(doc.load_page(0))
+        p2, _, _, _ = classify_page(doc.load_page(0), prev_type=p1)
         doc.close()
         assert p1 in ("text", "table", "mixed", "scan")
         assert p2 in ("text", "table", "mixed", "scan")
 
     def test_table_page_detected_via_stroked_lines(self, table_pdf):
         doc = _open(table_pdf)
-        page_type, feats = classify_page(doc.load_page(0))
+        page_type, feats, log, raw = classify_page(doc.load_page(0))
         doc.close()
         assert feats.line_count >= 20, f"expected many stroked lines, got {feats.line_count}"
         assert page_type == "table"
@@ -78,7 +80,7 @@ class TestClassifyPage:
         prev = None
         types = []
         for i in range(n):
-            pt, _ = classify_page(doc.load_page(i), prev_type=prev)
+            pt, _, _, _ = classify_page(doc.load_page(i), prev_type=prev)
             types.append(pt)
             prev = pt
         doc.close()

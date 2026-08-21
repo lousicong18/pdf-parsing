@@ -21,15 +21,15 @@ class TestDispatchPage:
         result = dispatch_page(page, "text", "t1", 0, doc)
         doc.close()
         assert isinstance(result, tuple)
-        assert len(result) == 2
-        blocks, features = result
+        assert len(result) == 3
+        blocks, features, raw = result
         assert isinstance(blocks, list)
         assert features is not None
 
     def test_text_branch(self, text_pdf):
         doc = fitz.open(text_pdf)
         page = doc.load_page(0)
-        blocks, features = dispatch_page(page, "text", "t1", 0, doc)
+        blocks, features, raw = dispatch_page(page, "text", "t1", 0, doc)
         doc.close()
         _blocks_have_bbox_and_page_type(blocks)
         for b in blocks:
@@ -38,7 +38,7 @@ class TestDispatchPage:
     def test_table_branch(self, table_pdf):
         doc = fitz.open(table_pdf)
         page = doc.load_page(0)
-        blocks, features = dispatch_page(page, "table", "t1", 0, doc)
+        blocks, features, raw = dispatch_page(page, "table", "t1", 0, doc)
         doc.close()
         _blocks_have_bbox_and_page_type(blocks)
 
@@ -46,7 +46,7 @@ class TestDispatchPage:
         doc = fitz.open(mixed_pdf)
         page = doc.load_page(0)
         ctx = metrics.new_task_metrics()
-        blocks, features = dispatch_page(page, "mixed", "t1", 0, doc, metrics_ctx=ctx)
+        blocks, features, raw = dispatch_page(page, "mixed", "t1", 0, doc, metrics_ctx=ctx)
         doc.close()
         _blocks_have_bbox_and_page_type(blocks)
         for b in blocks:
@@ -56,7 +56,7 @@ class TestDispatchPage:
         doc = fitz.open(scan_pdf)
         page = doc.load_page(0)
         ctx = metrics.new_task_metrics()
-        blocks, features = dispatch_page(page, "scan", "t1", 0, doc, metrics_ctx=ctx)
+        blocks, features, raw = dispatch_page(page, "scan", "t1", 0, doc, metrics_ctx=ctx)
         doc.close()
         _blocks_have_bbox_and_page_type(blocks)
         for b in blocks:
@@ -65,6 +65,6 @@ class TestDispatchPage:
     def test_features_columns_populated(self, text_pdf):
         doc = fitz.open(text_pdf)
         page = doc.load_page(0)
-        blocks, features = dispatch_page(page, "text", "t1", 0, doc)
+        blocks, features, raw = dispatch_page(page, "text", "t1", 0, doc)
         doc.close()
         assert features.columns >= 1

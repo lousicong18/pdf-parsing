@@ -4,8 +4,9 @@ import hashlib
 import json
 from typing import Optional
 
-from src.models.schemas import Block, ImageData, PageType
+from src.models.schemas import Block, ImageData, PageType, TableData
 from src.parser import extract_text, vlm
+from src.parser.table_extractor import _try_rebuild_chart_table
 from src.store import image_cache
 from src.task_manager import progress_service
 from src.utils import column_detection, pdf_utils
@@ -135,7 +136,7 @@ Output JSON:
 Rules: colors 0-1, coordinates in pt, no guessed values."""
     try:
         resp = vlm.vlm_describe(img_bytes, metrics_ctx, model_name, prompt=prompt)
-        return json.loads(resp.content)
+        return json.loads(resp)
     except Exception as e:
         progress_service.add_error(task_id, page_num, f"VLM structure failed: {e}")
         return {}
@@ -148,13 +149,35 @@ def process_chart_table_page(page, task_id, page_num, doc, metrics_ctx, model_na
         template = _vlm_detect_structure(page, task_id, page_num, metrics_ctx, model_name)
         _template_cache[fp] = template
     if not template:
-        return [], "VLM failed"
+        rebuilt = _try_rebuild_chart_table(page, doc.name, page_num)
+        if rebuilt is None:
+            return [], "VLM failed"
+        return [_table_data_to_block(rebuilt, page)], f"chart_table_rebuilt (fp={fp})"
     chart_data = _extract_chart_data(page, template)
     markdown = _merge_to_markdown(template, chart_data, page)
     bbox = [0, 0, page.rect.width, page.rect.height]
     block = Block(type="table", bbox=bbox, page_type="mixed", order=0,
                   table=None, content=markdown)
     return [block], f"chart_table (fp={fp})"
+
+
+def _table_data_to_block(td: TableData, page) -> Block:
+    md = _format_md_table(_table_headers(td), _table_rows(td))
+    bbox = td.bbox or [0, 0, page.rect.width, page.rect.height]
+    return Block(type="table", bbox=bbox, page_type="mixed", order=0,
+                 table=td, content=md)
+
+
+def _table_headers(td: TableData) -> list[str]:
+    if td.rows:
+        return td.rows[0]
+    return [f"Col{i}" for i in range(td.n_cols)]
+
+
+def _table_rows(td: TableData) -> list[list[str]]:
+    if len(td.rows) > 1:
+        return td.rows[1:]
+    return []
 
 
 def _is_background_color(fill) -> bool:
