@@ -56,11 +56,11 @@ def run_parse(task_id: str, pdf_path: str, vlm_model: Optional[str] = None) -> N
         prev_header: Optional[list[str]] = None
         for page_num in range(doc.page_count):
             page = doc.load_page(page_num)
-            page_type, features = classify.classify_page(page, prev_type, pdf_path, page_num, task_id, ctx)
-            blocks, features = pipeline.dispatch_page(
+            page_type, features, cls_log, raw = classify.classify_page(page, prev_type, pdf_path, page_num, task_id, ctx)
+            blocks, features, raw = pipeline.dispatch_page(
                 page, page_type, task_id, page_num, doc, prev_type, ctx, vlm_model, features, prev_header,
             )
-            progress_service.update_page_done(task_id, page_num + 1, page_type, blocks, features)
+            progress_service.update_page_done(task_id, page_num + 1, page_type, blocks, features, cls_log, raw)
             prev_type = page_type
             # 记录当前页最后一个表格的表头，用于下一页续表去重
             prev_header = None

@@ -39,6 +39,14 @@ export interface PageFeatures {
   columns: number
 }
 
+export interface PageRaw {
+  text_blocks: (string | number)[][]
+  images: (string | number)[][]
+  drawings: Record<string, any>[]
+  links: (string | number)[][]
+  page_size: number[]
+}
+
 export interface VlmCallMetric {
   kind: string
   model: string
@@ -73,6 +81,8 @@ export interface PageResult {
   type: PageType
   blocks: Block[]
   features?: PageFeatures
+  classification_log?: string[]
+  raw?: PageRaw
 }
 
 export interface TaskError {

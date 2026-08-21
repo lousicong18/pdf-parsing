@@ -3,7 +3,8 @@
 from fastapi import APIRouter, Query
 from fastapi.responses import PlainTextResponse, Response
 
-from src.models.schemas import ErrorResponse, ParseResult
+from src.models.schemas import Block, ErrorResponse, ParseResult
+from src.parser.extract_table import tables_to_markdown
 from src.store import task_store
 from src.utils.errors import AppError
 
@@ -42,7 +43,27 @@ def _build_markdown(result: ParseResult) -> str:
     lines: list[str] = [f"# {result.filename}\n"]
     for page in result.pages:
         lines.append(f"\n## 第 {page.page} 页 · 类型：{page.type}\n")
+        prev_text = ""
         for block in page.blocks:
-            lines.append(block.content or "")
+            if block.type == "table" and block.table:
+                title = _find_table_title(block, prev_text)
+                content = tables_to_markdown(block.table, title=title)
+                if block.table.cross_page:
+                    content = "> （跨页续表）\n" + content
+                lines.append(content)
+            else:
+                lines.append(block.content or "")
             lines.append("")
+            if block.type == "text" and block.content:
+                prev_text = block.content.strip()
     return "\n".join(lines)
+
+
+def _find_table_title(block: Block, prev_text: str) -> str:
+    if block.table and getattr(block.table, "title", None):
+        return block.table.title
+    if prev_text and len(prev_text) < 60:
+        stripped = prev_text.strip()
+        if stripped and (stripped[0].isdigit() or stripped.startswith("表") or stripped.lower().startswith("table")):
+            return stripped
+    return ""

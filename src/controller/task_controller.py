@@ -1,4 +1,4 @@
-"""GET /api/v1/tasks — list task history; GET /api/v1/tasks/{task_id} — get full parse result."""
+"""GET /api/v1/tasks — list task history; GET /api/v1/tasks/{task_id} — get full parse result; DELETE /api/v1/tasks/{task_id} — delete task."""
 
 from fastapi import APIRouter
 
@@ -28,3 +28,14 @@ def get_task(task_id: str) -> ParseResult:
     if result is None:
         raise AppError(code="TASK_NOT_FOUND", detail="任务不存在或已过期", status_code=404)
     return result
+
+
+@router.delete(
+    "/tasks/{task_id}",
+    responses={404: {"model": ErrorResponse}},
+)
+def delete_task(task_id: str) -> dict:
+    existed = task_store.delete(task_id)
+    if not existed:
+        raise AppError(code="TASK_NOT_FOUND", detail="任务不存在或已过期", status_code=404)
+    return {"detail": "deleted", "task_id": task_id}

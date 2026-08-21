@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import type { ParseResult, TaskMetrics } from '@/types'
-import { createParseTask, exportTask, getTask } from '@/services/parse'
+import { createParseTask, exportTask, getTask, exportKb } from '@/services/parse'
 
 const STATUS_TEXT: Record<string, string> = {
   pending: '待处理',
@@ -106,6 +106,35 @@ export const useParserStore = defineStore('parser', () => {
     URL.revokeObjectURL(url)
   }
 
+  async function exportKbResult(chunkTokens: number, overlapTokens: number) {
+    if (!result.value || !isExportReady.value) {
+      ElMessage.warning('任务未完成，暂不可导出')
+      return
+    }
+    const data = await exportKb(result.value.task_id, chunkTokens, overlapTokens)
+    const md = _buildKbMarkdown(data)
+    const blob = new Blob([md], { type: 'text/markdown' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `${result.value.filename}_kb.md`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
+  function _buildKbMarkdown(data: any): string {
+    const lines: string[] = []
+    lines.push(`# ${data.filename}`)
+    lines.push(`> 知识库优化导出 | ${data.total_chunks} 块 | 目标 ${data.chunk_tokens} tok/块 | 重叠 ${data.overlap_tokens} tok\n`)
+    for (const c of data.chunks) {
+      lines.push(`---`)
+      lines.push(`<!-- chunk_id: ${c.chunk_id} | pages: ${c.page_start}-${c.page_end} | types: ${c.page_types.join(',')} | tokens: ~${c.token_estimate} -->`)
+      lines.push(c.content)
+      lines.push('')
+    }
+    return lines.join('\n')
+  }
+
   async function loadTask(taskId: string) {
     stopPolling()
     try {
@@ -145,6 +174,7 @@ export const useParserStore = defineStore('parser', () => {
     startPolling,
     stopPolling,
     exportResult,
+    exportKbResult,
     reset
   }
 })

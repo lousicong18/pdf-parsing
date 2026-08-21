@@ -23,7 +23,15 @@ const parserStore = useParserStore()
     >
       导出 Markdown（派生视图）
     </el-button>
-    <el-tooltip content="JSON 保全 bbox/合并单元格/page_type 且含 VLM 成本 metrics；Markdown 为派生视图">
+    <el-button
+      type="warning"
+      :disabled="!parserStore.isExportReady"
+      data-test="export-kb"
+      @click="parserStore.exportKbResult(500, 50)"
+    >
+      导出知识库（切块 + 元数据）
+    </el-button>
+    <el-tooltip content="JSON 保全结构；Markdown 为派生视图；知识库版按 token 切块并带页码/类型元数据">
       <el-icon><QuestionFilled /></el-icon>
     </el-tooltip>
   </div>

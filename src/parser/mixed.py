@@ -14,6 +14,7 @@ def extract_and_describe_images(
 ) -> list[Block]:
     blocks: list[Block] = []
     images = page.get_images(full=True) or []
+    page_area = page.rect.width * page.rect.height
     for index, img in enumerate(images):
         xref = img[0]
         try:
@@ -22,6 +23,11 @@ def extract_and_describe_images(
             progress_service.add_error(task_id, page_num, f"extract image {index} failed")
             continue
         bbox = _image_bbox(page, img)
+        # 过滤全页背景图（面积 >= 80% 页面）
+        if page_area > 0 and bbox:
+            img_area = max(0, bbox[2] - bbox[0]) * max(0, bbox[3] - bbox[1])
+            if img_area >= 0.8 * page_area:
+                continue
         image_cache.put(task_id, page_num, index, image_bytes)
         url = f"/api/v1/tasks/{task_id}/images/{page_num}/{index}"
         try:

@@ -36,3 +36,13 @@ export function getModels(): Promise<ModelsResponse> {
 export function listTasks(): Promise<TaskSummary[]> {
   return request.get('/tasks').then((r) => r.data)
 }
+
+export function deleteTask(taskId: string): Promise<void> {
+  return request.delete(`/tasks/${taskId}`).then((r) => r.data)
+}
+
+export function exportKb(taskId: string, chunkTokens = 500, overlapTokens = 50): Promise<any> {
+  return request.get(`/tasks/${taskId}/export-kb`, {
+    params: { chunk_tokens: chunkTokens, overlap_tokens: overlapTokens }
+  }).then((r) => r.data)
+}

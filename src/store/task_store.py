@@ -103,6 +103,23 @@ def set_metrics(task_id: str, metrics: TaskMetrics) -> None:
             _persist()
 
 
+def delete(task_id: str) -> bool:
+    """Delete a task from store. Returns True if existed."""
+    with _lock:
+        existed = _store.pop(task_id, None) is not None
+        if existed:
+            _persist()
+    # remove temp pdf
+    if existed:
+        try:
+            pdf = project_root() / "temp" / f"{task_id}.pdf"
+            if pdf.exists():
+                pdf.unlink()
+        except Exception:
+            pass
+    return existed
+
+
 def summary(task_id: str):
     """Return a lightweight TaskSummary for history listing."""
     with _lock:

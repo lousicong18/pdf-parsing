@@ -5,6 +5,7 @@ from typing import Optional
 from pydantic import BaseModel
 
 from src.utils import env
+from src.utils.env import project_root
 
 
 class ModelConfig(BaseModel):
@@ -16,7 +17,7 @@ class ModelConfig(BaseModel):
 
 def load_registry(path: Optional[str] = None) -> dict[str, ModelConfig]:
     """Load models.json; fall back to .env single model when missing."""
-    reg_path = Path(path or env.VLM_MODELS_FILE)
+    reg_path = Path(path) if path else project_root() / env.VLM_MODELS_FILE
     if reg_path.is_file():
         data = json.loads(reg_path.read_text(encoding="utf-8"))
         return {

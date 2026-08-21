@@ -2,8 +2,8 @@
 import { onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage, ElTag } from 'element-plus'
-import { Refresh, View, Document } from '@element-plus/icons-vue'
-import { listTasks } from '@/services/parse'
+import { Refresh, View, Document, Delete } from '@element-plus/icons-vue'
+import { listTasks, deleteTask } from '@/services/parse'
 import type { TaskSummary } from '@/types'
 
 const router = useRouter()
@@ -11,9 +11,9 @@ const tasks = ref<TaskSummary[]>([])
 const loading = ref(false)
 let timer: ReturnType<typeof setInterval> | null = null
 
-const STATUS_MAP: Record<string, { text: string; type: 'success' | 'warning' | 'danger' | 'info' | '' }> = {
+const STATUS_MAP: Record<string, { text: string; type: 'success' | 'warning' | 'danger' | 'info' | undefined }> = {
   pending: { text: '待处理', type: 'info' },
-  parsing: { text: '解析中', type: '' },
+  parsing: { text: '解析中', type: undefined },
   completed: { text: '已完成', type: 'success' },
   partial: { text: '部分完成', type: 'warning' },
   failed: { text: '失败', type: 'danger' }
@@ -32,6 +32,16 @@ async function fetchTasks() {
 
 function viewTask(taskId: string) {
   router.push({ name: 'parser', query: { task_id: taskId } })
+}
+
+async function handleDelete(row: TaskSummary) {
+  try {
+    await deleteTask(row.task_id)
+    ElMessage.success('已删除')
+    fetchTasks()
+  } catch (e: any) {
+    ElMessage.error(e?.message || '删除失败')
+  }
 }
 
 function getRowClass({ row }: { row: TaskSummary }) {
@@ -83,7 +93,7 @@ onUnmounted(() => {
         </template>
       </el-table-column>
       <el-table-column prop="created_at" label="创建时间" width="180" />
-      <el-table-column label="操作" width="100" align="center" fixed="right">
+      <el-table-column label="操作" width="160" align="center" fixed="right">
         <template #default="{ row }">
           <el-button
             link
@@ -93,6 +103,16 @@ onUnmounted(() => {
           >
             查看
           </el-button>
+          <el-popconfirm
+            title="确定删除这条记录？"
+            @confirm="handleDelete(row)"
+          >
+            <template #reference>
+              <el-button link type="danger" :icon="Delete">
+                删除
+              </el-button>
+            </template>
+          </el-popconfirm>
         </template>
       </el-table-column>
     </el-table>

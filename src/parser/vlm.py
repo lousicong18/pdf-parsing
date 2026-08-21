@@ -27,6 +27,19 @@ DESCRIBE_PROMPT = (
     "用中文输出，保持简洁准确。"
 )
 
+CHART_PROMPT = (
+    "这是一张表格中的图表区域（如散点图、柱状图等）。请按以下格式解析：\n"
+    "1. 图表类型：说明是什么类型的图表\n"
+    "2. 数据系列：只描述可见的颜色和形状特征（如'深蓝色圆点'、'红色三角'），禁止猜测或编造任何品牌名、系列名\n"
+    "3. 坐标轴：说明X轴和Y轴的含义和刻度范围\n"
+    "4. 整体趋势：描述数据的总体分布特征（如哪些系列偏高/低、差距大小）\n"
+    "严格规则：\n"
+    "- 不得编造、推测任何品牌名称、产品名称或数据系列名称\n"
+    "- 图例文字过小无法读取时，只描述颜色/形状，不猜测文字内容\n"
+    "- 如果无法确定某个信息，直接写'无法识别'，不要编造\n"
+    "用中文输出。"
+)
+
 OCR_PROMPT = (
     "请对这张扫描件图片进行 OCR 识别，输出其中所有可读文字。"
     "尽量保持原始段落与结构，用中文输出。"
@@ -140,6 +153,11 @@ def _calc_cost(model: str, prompt_tokens: int, completion_tokens: int) -> float:
 
 def vlm_describe(image_bytes: bytes, metrics_ctx, model_name: Optional[str] = None) -> str:
     return _call_vlm(image_bytes, DESCRIBE_PROMPT, metrics_ctx, model_name, kind="image")
+
+
+def vlm_describe_chart(image_bytes: bytes, metrics_ctx, model_name: Optional[str] = None) -> str:
+    """专门用于解析图表（散点图、柱状图等）的 VLM 调用。"""
+    return _call_vlm(image_bytes, CHART_PROMPT, metrics_ctx, model_name, kind="chart")
 
 
 def vlm_ocr(image_bytes: bytes, metrics_ctx, model_name: Optional[str] = None) -> str:

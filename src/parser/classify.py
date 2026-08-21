@@ -236,6 +236,12 @@ def _classify_with_features(feats: PageFeatures, prev_type: Optional[str] = None
         and feats.area_ratio >= env.CLS_AREA_RATIO_MIN
     )
 
+    # chart-embedded table: fills dominate grid lines (dots/bars/areas)
+    if feats.filled_path_count > 30 and feats.filled_path_count > feats.line_count:
+        info(f"chart_table: chart-embedded table (fills={feats.filled_path_count}>30, "
+             f"fills>lines {feats.filled_path_count}>{feats.line_count})")
+        return "mixed"
+
     # 无线表格兜底：线条多 + 文本块多 + 多列结构，但面积比不足
     is_borderless_table = (
         feats.line_count > env.CLS_LINE_COUNT_TABLE
@@ -259,11 +265,6 @@ def _classify_with_features(feats: PageFeatures, prev_type: Optional[str] = None
     if prev_type == "table" and feats.line_count > 5:
         info(f"table: 跨页上下文 (上页为 table, 本页线条{feats.line_count}>5)")
         return "table"
-
-    # chart-embedded table: many fills (dots/bars/areas) + few grid lines
-    if feats.filled_path_count > 50 and feats.line_count < 20:
-        info(f"chart_table: chart-embedded table (fills={feats.filled_path_count}>50, lines={feats.line_count}<20)")
-        return "mixed"
 
     # mixed
     if feats.images_count > 0 and feats.text_blocks_count > 0:

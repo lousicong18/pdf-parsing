@@ -9,7 +9,7 @@ from fastapi.responses import JSONResponse
 
 from src.utils import env
 from src.utils.errors import AppError
-from src.controller import parse_controller, task_controller, export_controller, image_controller, models_controller
+from src.controller import parse_controller, task_controller, export_controller, image_controller, models_controller, kb_export_controller
 
 logger = logging.getLogger("pdf_parser")
 
@@ -29,6 +29,7 @@ api_v1.include_router(task_controller.router)
 api_v1.include_router(export_controller.router)
 api_v1.include_router(image_controller.router)
 api_v1.include_router(models_controller.router)
+api_v1.include_router(kb_export_controller.router)
 app.mount("/api/v1", api_v1)
 
 

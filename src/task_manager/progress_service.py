@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 from typing import Optional
 
-from src.models.schemas import Block, PageFeatures, PageResult, TaskError, TaskMetrics
+from src.models.schemas import Block, PageFeatures, PageRaw, PageResult, TaskError, TaskMetrics
 from src.store import task_store
 
 
@@ -15,12 +15,16 @@ def update_page_done(
     page_type: str,
     blocks: list[Block],
     features: Optional[PageFeatures] = None,
+    classification_log: Optional[list[str]] = None,
+    raw: Optional[PageRaw] = None,
 ) -> None:
     page_result = PageResult(
         page=page,
         type=page_type,  # type: ignore[arg-type]
         blocks=blocks,
         features=features,
+        classification_log=classification_log or [],
+        raw=raw,
     )
     task_store.append_page(task_id, page_result)
     task_store.update_progress(task_id, page)
