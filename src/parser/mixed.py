@@ -112,8 +112,8 @@ def _page_fingerprint(page) -> str:
         if fill and len(fill) >= 3:
             if not (fill[0] > 0.85 and fill[1] > 0.85 and fill[2] > 0.85):
                 colors.add((round(fill[0], 1), round(fill[1], 1), round(fill[2], 1)))
-    d_rounded = round(len(drawings) / 100) * 100
-    c_rounded = round(len(colors) / 5) * 5
+    d_rounded = round(len(drawings) / 50) * 50
+    c_rounded = round(len(colors) / 10) * 10
     feature = f"d={d_rounded},c={c_rounded}"
     return hashlib.md5(feature.encode()).hexdigest()[:12]
 
@@ -290,7 +290,7 @@ def _extract_dot_chart(shapes: list, chart: dict, template: dict) -> dict:
     x_max = chart.get("chart_area", {}).get("x_max", 1)
     v_min = scale.get("min_value", 0)
     v_max = scale.get("max_value", 1)
-    rows = template.get("rows", [])
+    rows = chart.get("rows", [])
     legend = chart.get("legend", {})
     color_to_series = {}
     for color_str, name in legend.items():
@@ -319,7 +319,7 @@ def _extract_hbar_chart(shapes: list, chart: dict, template: dict) -> dict:
     v_min = scale.get("min_value", 0)
     v_max = scale.get("max_value", 100)
     max_width = max(b["w"] for b in bars) if bars else 1
-    rows = template.get("rows", [])
+    rows = chart.get("rows", [])
     legend = chart.get("legend", {})
     color_to_series = {_parse_color(k): v for k, v in legend.items()}
     data = {}
@@ -341,7 +341,7 @@ def _extract_vbar_chart(shapes: list, chart: dict, template: dict) -> dict:
     v_min = scale.get("min_value", 0)
     v_max = scale.get("max_value", 100)
     max_height = max(b["h"] for b in bars) if bars else 1
-    rows = template.get("rows", [])
+    rows = chart.get("rows", [])
     legend = chart.get("legend", {})
     color_to_series = {_parse_color(k): v for k, v in legend.items()}
     data = {}
@@ -359,7 +359,7 @@ def _extract_stacked_bar(shapes: list, chart: dict, template: dict) -> dict:
     bars = [s for s in shapes if s["w"] > 5 and s["h"] > 5]
     if not bars:
         return {}
-    rows = template.get("rows", [])
+    rows = chart.get("rows", [])
     legend = chart.get("legend", {})
     color_to_series = {_parse_color(k): v for k, v in legend.items()}
     scale = chart.get("scale", {})
@@ -389,8 +389,9 @@ def _merge_to_markdown(template: dict, chart_data: dict, page) -> str:
     headers = _build_headers(template)
     if not headers:
         return ""
+    chart_rows = template.get("charts", [{}])[0].get("rows", [])
     rows = []
-    for i, row_info in enumerate(template.get("rows", [])):
+    for i, row_info in enumerate(chart_rows):
         row = [""] * len(headers)
         # Fill text columns
         for col in template.get("text_columns", []):
