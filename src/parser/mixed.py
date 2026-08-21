@@ -79,9 +79,10 @@ def process_mixed_page(page, task_id, page_num, doc, metrics_ctx, model_name=Non
 
 
 def _is_chart_table_page(page) -> bool:
-    """Detect chart-embedded table page by counting filled shapes."""
+    """Detect chart page by counting non-background fills across all widths."""
     drawings = page.get_drawings() or []
     filled = 0
+    colors = set()
     for d in drawings:
         if d.get("type") not in ("f", "fs"):
             continue
@@ -91,13 +92,18 @@ def _is_chart_table_page(page) -> bool:
         if fill[0] > 0.85 and fill[1] > 0.85 and fill[2] > 0.85:
             continue
         rect = d.get("rect")
-        if rect and 2 <= rect.x1 - rect.x0 <= 100:
-            filled += 1
-    return filled > 30
+        if not rect:
+            continue
+        w = rect.x1 - rect.x0
+        h = rect.y1 - rect.y0
+        if w < 2 or h < 2:
+            continue
+        filled += 1
+        colors.add((round(fill[0], 1), round(fill[1], 1), round(fill[2], 1)))
+    return filled > 10 or len(colors) >= 3
 
 
 def _page_fingerprint(page) -> str:
-    blocks = page.get_text("blocks") or []
     drawings = page.get_drawings() or []
     colors = set()
     for d in drawings:
@@ -105,7 +111,9 @@ def _page_fingerprint(page) -> str:
         if fill and len(fill) >= 3:
             if not (fill[0] > 0.85 and fill[1] > 0.85 and fill[2] > 0.85):
                 colors.add((round(fill[0], 1), round(fill[1], 1), round(fill[2], 1)))
-    feature = f"b={len(blocks)},d={len(drawings)},c={len(colors)}"
+    d_rounded = round(len(drawings) / 100) * 100
+    c_rounded = round(len(colors) / 5) * 5
+    feature = f"d={d_rounded},c={c_rounded}"
     return hashlib.md5(feature.encode()).hexdigest()[:12]
 
 
