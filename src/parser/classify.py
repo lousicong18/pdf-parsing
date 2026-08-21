@@ -4,18 +4,25 @@ from typing import Optional
 
 import fitz
 
-from src.models.schemas import PageFeatures, PageType
+from src.models.schemas import PageFeatures, PageRaw, PageType
 from src.utils import column_detection, env
 
+_DRAWINGS_LIMIT = 200  # 前端展示时 drawings 最大数量（避免 payload 过大）
 
-def classify_features(page) -> PageFeatures:
+
+def classify_features(page) -> tuple[PageFeatures, PageRaw]:
     text_blocks = page.get_text("blocks") or []
-    images = page.get_images(full=False) or []
+    images = page.get_images(full=True) or []
     drawings = page.get_drawings() or []
+    links = page.get_links() or []
 
     # PyMuPDF 1.28+ returns paint-type paths ('s' stroke / 'f' fill / 'fs' both).
     # Stroked paths ('s'/'fs') are the visible lines/rects that form table grids.
     line_count = sum(1 for d in drawings if d.get("type") in ("s", "fs"))
+    filled_path_count = sum(
+        1 for d in drawings
+        if d.get("type") in ("f", "fs") and d.get("fill") and len(d.get("fill", [])) >= 3
+    )
     drawings_path_count = len(drawings)
     text_blocks_count = len(text_blocks)
     images_count = len(images)
@@ -40,7 +47,7 @@ def classify_features(page) -> PageFeatures:
     # column count via shared detector (single source of truth for columns)
     columns = column_detection.column_detection(text_blocks)
 
-    return PageFeatures(
+    feats = PageFeatures(
         line_count=line_count,
         text_blocks_count=text_blocks_count,
         images_count=images_count,
@@ -51,34 +58,93 @@ def classify_features(page) -> PageFeatures:
         font_flags=font_flags,
         orthogonality=orthogonality,
         columns=columns,
+        filled_path_count=filled_path_count,
     )
+    raw = _build_raw(page, text_blocks, images, drawings, links)
+    return feats, raw
+
+
+def _build_raw(page, text_blocks, images, drawings, links) -> PageRaw:
+    """构建前端可展示的 PyMuPDF 原始数据（drawings 截断到 _DRAWINGS_LIMIT）。"""
+    # text_blocks: tuple → list，文本截断到 200 字符
+    tb_raw = []
+    for b in text_blocks:
+        item = list(b)
+        if len(item) >= 5 and isinstance(item[4], str):
+            item[4] = item[4][:200]
+        tb_raw.append(item)
+    # images: 只保留元数据（不含二进制）
+    img_raw = [list(img[:8]) for img in images]
+    # drawings: 截断数量，保留关键字段
+    draw_raw = []
+    for d in drawings[:_DRAWINGS_LIMIT]:
+        draw_raw.append({
+            "type": d.get("type"),
+            "rect": list(d.get("rect", [])),
+            "color": d.get("color"),
+            "fill": d.get("fill"),
+            "width": d.get("width"),
+            "items": _summarize_draw_items(d.get("items", [])),
+        })
+    # links: [kind, from, page, to, ...]
+    link_raw = [list(l[:6]) for l in links]
+    return PageRaw(
+        text_blocks=tb_raw,
+        images=img_raw,
+        drawings=draw_raw,
+        links=link_raw,
+        page_size=[page.rect.width, page.rect.height],
+    )
+
+
+def _summarize_draw_items(items) -> list[list]:
+    """drawing items 摘要：('re',rect) / ('l',p0,p1) / ('c',...) → 保留类型+坐标。"""
+    summary = []
+    for item in items:
+        if not item:
+            continue
+        kind = item[0]
+        if kind == "re":
+            summary.append(["re", list(item[1])] if len(item) >= 2 else ["re"])
+        elif kind == "l":
+            summary.append(["l", list(item[1]), list(item[2])] if len(item) >= 3 else ["l"])
+        else:
+            summary.append([kind])
+    return summary
 
 
 def classify_page(page, prev_type: Optional[str] = None, pdf_path: str = "", page_num: int = -1,
-                  task_id: str = "", metrics_ctx=None) -> tuple[PageType, PageFeatures]:
-    feats = classify_features(page)
-    page_type = _classify_with_features(feats, prev_type)
+                  task_id: str = "", metrics_ctx=None) -> tuple[PageType, PageFeatures, list[str], PageRaw]:
+    log: list[str] = []
+    feats, raw = classify_features(page)
+    log.append(f"特征: 线条={feats.line_count}, 文本块={feats.text_blocks_count}, 图片={feats.images_count}, "
+               f"面积比={feats.area_ratio:.3f}, 栏数={feats.columns}, 路径数={feats.drawings_path_count}")
+    page_type = _classify_with_features(feats, prev_type, log)
     # 探针兜底：满足以下任一条件时试探性提取确认是否含表格
-    # (a) 线条较多但面积比不足（接近表格判定）
-    # (b) 文本块远多于线条（稀疏表格布局），但排除纯文本段落过多的页面
     probe_trigger = (
         feats.line_count > env.CLS_LINE_COUNT_TABLE and feats.area_ratio < env.CLS_AREA_RATIO_MIN
     ) or (
-        feats.text_blocks_count >= 10 and feats.line_count <= 10
+        feats.text_blocks_count >= 10 and 5 <= feats.line_count <= 10
         and feats.text_blocks_count > feats.line_count * 2 and feats.text_blocks_count <= 50
     )
     if page_type != "table" and probe_trigger and pdf_path:
+        log.append(f"探针兜底触发: 尝试提取表格验证")
         if _probe_has_tables(page, pdf_path, page_num):
             page_type = "table"
+            log.append(f"探针检出表格 → 修正为 table")
     # VLM 兜底：分类为 mixed 且探针未检出时，用 VLM 判断是否含表格
-    if page_type == "mixed" and task_id and _vlm_detect_table(page, task_id, page_num, metrics_ctx):
-        page_type = "table"
-    return page_type, feats
+    if page_type == "mixed" and task_id and env.CLS_VLM_FALLBACK == "on":
+        log.append(f"VLM 兜底触发: 判断 mixed 页是否含表格")
+        if _vlm_detect_table(page, task_id, page_num, metrics_ctx):
+            page_type = "table"
+            log.append(f"VLM 检出表格 → 修正为 table")
+    log.append(f"最终判定: {page_type}")
+    return page_type, feats, log, raw
 
 
 def _probe_has_tables(page, pdf_path: str, page_num: int) -> bool:
     """用 HybridExtractor 快速探测页面是否含表格（低成本兜底）。
-    要求检出表格满足：评分达标 + 多列结构 + 非公式布局。"""
+    要求检出表格满足：评分达标 + 多列结构 + 非公式布局 + 多列有内容。"""
     if not pdf_path or page_num < 0:
         return False
     try:
@@ -90,11 +156,26 @@ def _probe_has_tables(page, pdf_path: str, page_num: int) -> bool:
             if _table_score(t) < 0.6 or t.n_cols <= 1:
                 continue
             if _is_formula_layout(t):
-                continue  # 公式布局，跳过
+                continue
+            if not _multi_col_has_content(t):
+                continue  # 只有单列有内容（空列+文字假表格）
             return True
         return False
     except Exception:
         return False
+
+
+def _multi_col_has_content(t: "TableData") -> bool:
+    """至少 2 列包含多个有意义单元格（排除"项目符号列+文字"的假表格）。"""
+    if not t.rows or t.n_cols < 2:
+        return False
+    meaningful_len = 5  # 排除项目符号、短标签
+    cols_with_content = 0
+    for c in range(t.n_cols):
+        count = sum(1 for row in t.rows if c < len(row) and len(row[c].strip()) > meaningful_len)
+        if count >= 2:  # 该列至少 2 行有实质内容
+            cols_with_content += 1
+    return cols_with_content >= 2
 
 
 def _is_formula_layout(t) -> bool:
@@ -134,11 +215,18 @@ def _vlm_detect_table(page, task_id: str, page_num: int, metrics_ctx=None) -> bo
         return False
 
 
-def _classify_with_features(feats: PageFeatures, prev_type: Optional[str] = None) -> PageType:
+def _classify_with_features(feats: PageFeatures, prev_type: Optional[str] = None,
+                            log: Optional[list[str]] = None) -> PageType:
+    def info(msg: str) -> None:
+        if log is not None:
+            log.append(msg)
+
     # scan: no text blocks but has images; also hidden-text-layer heuristic
     if feats.text_blocks_count == 0 and feats.images_count > 0:
+        info(f"scan: 无文本块({feats.text_blocks_count}=0) 且有图片({feats.images_count}>0)")
         return "scan"
     if feats.images_count > 0 and feats.overlap_rate > 0.4 and feats.char_density > 5000 and feats.font_flags:
+        info(f"scan: 隐形文本层启发式 (重叠率={feats.overlap_rate:.2f}>0.4, 字符密度={feats.char_density:.0f}>5000, 有字体标记)")
         return "scan"
 
     # table: enough lines + text blocks, area filter to reject small logos
@@ -147,24 +235,45 @@ def _classify_with_features(feats: PageFeatures, prev_type: Optional[str] = None
         and feats.text_blocks_count >= env.CLS_TEXT_BLOCKS_MIN
         and feats.area_ratio >= env.CLS_AREA_RATIO_MIN
     )
+
+    # 无线表格兜底：线条多 + 文本块多 + 多列结构，但面积比不足
+    is_borderless_table = (
+        feats.line_count > env.CLS_LINE_COUNT_TABLE
+        and feats.text_blocks_count >= 10
+        and feats.area_ratio < env.CLS_AREA_RATIO_MIN
+        and feats.columns >= 2
+    )
+
     if is_table_like:
+        info(f"table: 有线表格 (线条{feats.line_count}>{env.CLS_LINE_COUNT_TABLE}, "
+             f"文本块{feats.text_blocks_count}>={env.CLS_TEXT_BLOCKS_MIN}, "
+             f"面积比{feats.area_ratio:.3f}>={env.CLS_AREA_RATIO_MIN})")
+        return "table"
+    if is_borderless_table:
+        info(f"table: 无线表格 (线条{feats.line_count}>{env.CLS_LINE_COUNT_TABLE}, "
+             f"文本块{feats.text_blocks_count}>=10, 面积比{feats.area_ratio:.3f}<{env.CLS_AREA_RATIO_MIN}, "
+             f"栏数{feats.columns}>=2)")
         return "table"
 
-    # cross-page context: previous page was table + 当前页有线条/面积特征 -> 偏向 table
+    # cross-page context
     if prev_type == "table" and feats.line_count > 5:
+        info(f"table: 跨页上下文 (上页为 table, 本页线条{feats.line_count}>5)")
         return "table"
 
-    # mixed: images + text; or vector-drawing heavy (no embedded images but many paths)
+    # mixed
     if feats.images_count > 0 and feats.text_blocks_count > 0:
+        info(f"mixed: 图文混排 (图片{feats.images_count}>0, 文本块{feats.text_blocks_count}>0)")
         return "mixed"
     if feats.images_count == 0 and feats.drawings_path_count > env.CLS_DRAWINGS_PATH_MIXED:
+        info(f"mixed: 矢量图密集 (无嵌入图片, 路径数{feats.drawings_path_count}>{env.CLS_DRAWINGS_PATH_MIXED})")
         return "mixed"
 
-    # text: has text, few lines
+    # text
     if feats.text_blocks_count > 0 and feats.images_count == 0 and feats.line_count < env.CLS_LINE_COUNT_TEXT:
+        info(f"text: 纯文本 (文本块{feats.text_blocks_count}>0, 无图片, 线条{feats.line_count}<{env.CLS_LINE_COUNT_TEXT})")
         return "text"
 
-    # fallback
+    info(f"mixed: 兜底默认")
     return "mixed"
 
 

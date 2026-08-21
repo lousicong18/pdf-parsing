@@ -22,6 +22,8 @@ class TableData(BaseModel):
     cross_page: bool = False
     header_repeat: bool = False  # 续表行与上一页表头重复
     bbox: list[float] = []  # [x0, y0, x1, y1] in page coordinates
+    row_y_positions: list[float] = []  # data row center y-coordinates (page coords), aligned with rows[header_count:]
+    chart_columns: list[int] = []  # indices of columns containing chart drawings (detected by vector analysis)
 
 
 class ImageData(BaseModel):
@@ -43,6 +45,16 @@ class PageFeatures(BaseModel):
     font_flags: list[str] = []  # hidden-layer feature fonts
     orthogonality: float  # line orthogonality 0-1
     columns: int = 1
+    filled_path_count: int = 0  # filled paths (dots/bars/areas/pies), excludes strokes
+
+
+class PageRaw(BaseModel):
+    """PyMuPDF 原始提取数据（用于前端查看 PDF 原始结构）。"""
+    text_blocks: list[list] = []  # get_text("blocks"): [x0,y0,x1,y1,text,block_no,block_type]
+    images: list[list] = []       # get_images(full=True): [xref,w,h,bpc,colorspace,...]
+    drawings: list[dict] = []     # get_drawings(): 前 N 个路径（含 type/items/rect/color）
+    links: list[list] = []        # get_links()
+    page_size: list[float] = []   # [width, height]
 
 
 class VlmCallMetric(BaseModel):
@@ -83,6 +95,8 @@ class PageResult(BaseModel):
     type: PageType
     blocks: list[Block] = []
     features: Optional[PageFeatures] = None
+    classification_log: list[str] = []
+    raw: Optional[PageRaw] = None
 
 
 class TaskError(BaseModel):
