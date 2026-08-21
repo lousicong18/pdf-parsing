@@ -141,11 +141,8 @@ def process_chart_table_page(page, task_id, page_num, doc, metrics_ctx, model_na
         _template_cache[fp] = template
     if not template:
         return [], "VLM failed"
-    try:
-        chart_data = _extract_chart_data(page, template)
-        markdown = _merge_to_markdown(template, chart_data, page)
-    except NameError:
-        markdown = f"<!-- chart_table placeholder fp={fp} -->"
+    chart_data = _extract_chart_data(page, template)
+    markdown = _merge_to_markdown(template, chart_data, page)
     bbox = [0, 0, page.rect.width, page.rect.height]
     block = Block(type="table", bbox=bbox, page_type="mixed", order=0,
                   table=None, content=markdown)
@@ -206,6 +203,240 @@ def _cluster_by_color(shapes: list, thresh: float = 0.08) -> dict:
         if not matched:
             clusters[s["color"]] = [s]
     return clusters
+
+
+def _parse_color(color_str: str) -> tuple:
+    try:
+        return tuple(float(x.strip()) for x in color_str.strip("()").split(","))
+    except Exception:
+        return (0, 0, 0)
+
+
+def _match_row(cy: float, rows: list) -> Optional[int]:
+    best_idx = None
+    best_dist = 15.0
+    for i, row in enumerate(rows):
+        dist = abs(row.get("y_center", 0) - cy)
+        if dist < best_dist:
+            best_dist = dist
+            best_idx = i
+    return best_idx
+
+
+def _match_series(color: tuple, color_to_series: dict) -> str:
+    for series_color, name in color_to_series.items():
+        if _color_distance(color, series_color) < 0.1:
+            return name
+    return str(color)
+
+
+def _extract_chart_data(page, template: dict) -> dict:
+    charts = template.get("charts", [])
+    if not charts:
+        return {}
+    chart = charts[0]  # primary chart
+    chart_type = chart.get("chart_type", "unknown")
+    chart_area = chart.get("chart_area")
+    drawings = page.get_drawings() or []
+    shapes = _collect_colored_shapes(drawings, chart_area)
+    dispatch = {
+        "dot": _extract_dot_chart,
+        "line": _extract_dot_chart,  # same logic: extract points
+        "bar_horizontal": _extract_hbar_chart,
+        "bar_vertical": _extract_vbar_chart,
+        "bar_stacked": _extract_stacked_bar,
+    }
+    extractor = dispatch.get(chart_type, _extract_dot_chart)
+    return extractor(shapes, chart, template)
+
+
+def _extract_dot_chart(shapes: list, chart: dict, template: dict) -> dict:
+    dots = [s for s in shapes if abs(s["w"] - s["h"]) <= 3 and 3 <= s["w"] <= 15]
+    if not dots:
+        return {}
+    scale = chart.get("scale", {})
+    x_min = chart.get("chart_area", {}).get("x_min", 0)
+    x_max = chart.get("chart_area", {}).get("x_max", 1)
+    v_min = scale.get("min_value", 0)
+    v_max = scale.get("max_value", 1)
+    rows = template.get("rows", [])
+    legend = chart.get("legend", {})
+    color_to_series = {}
+    for color_str, name in legend.items():
+        try:
+            c = _parse_color(color_str)
+            color_to_series[c] = name
+        except Exception:
+            pass
+    data = {}
+    for dot in dots:
+        row_idx = _match_row(dot["cy"], rows)
+        if row_idx is None:
+            continue
+        series = _match_series(dot["color"], color_to_series)
+        rel_x = (dot["cx"] - x_min) / (x_max - x_min) if x_max > x_min else 0
+        value = v_min + rel_x * (v_max - v_min)
+        data.setdefault(row_idx, {})[series] = round(value, 1)
+    return data
+
+
+def _extract_hbar_chart(shapes: list, chart: dict, template: dict) -> dict:
+    bars = [s for s in shapes if s["w"] > s["h"] and s["w"] > 10]
+    if not bars:
+        return {}
+    scale = chart.get("scale", {})
+    v_min = scale.get("min_value", 0)
+    v_max = scale.get("max_value", 100)
+    max_width = max(b["w"] for b in bars) if bars else 1
+    rows = template.get("rows", [])
+    legend = chart.get("legend", {})
+    color_to_series = {_parse_color(k): v for k, v in legend.items()}
+    data = {}
+    for bar in bars:
+        row_idx = _match_row(bar["cy"], rows)
+        if row_idx is None:
+            continue
+        series = _match_series(bar["color"], color_to_series)
+        value = v_min + (bar["w"] / max_width) * (v_max - v_min)
+        data.setdefault(row_idx, {})[series] = round(value, 1)
+    return data
+
+
+def _extract_vbar_chart(shapes: list, chart: dict, template: dict) -> dict:
+    bars = [s for s in shapes if s["h"] >= s["w"] and s["h"] > 10]
+    if not bars:
+        return {}
+    scale = chart.get("scale", {})
+    v_min = scale.get("min_value", 0)
+    v_max = scale.get("max_value", 100)
+    max_height = max(b["h"] for b in bars) if bars else 1
+    rows = template.get("rows", [])
+    legend = chart.get("legend", {})
+    color_to_series = {_parse_color(k): v for k, v in legend.items()}
+    data = {}
+    for bar in bars:
+        row_idx = _match_row(bar["cy"], rows)
+        if row_idx is None:
+            continue
+        series = _match_series(bar["color"], color_to_series)
+        value = v_min + (bar["h"] / max_height) * (v_max - v_min)
+        data.setdefault(row_idx, {})[series] = round(value, 1)
+    return data
+
+
+def _extract_stacked_bar(shapes: list, chart: dict, template: dict) -> dict:
+    bars = [s for s in shapes if s["w"] > 5 and s["h"] > 5]
+    if not bars:
+        return {}
+    rows = template.get("rows", [])
+    legend = chart.get("legend", {})
+    color_to_series = {_parse_color(k): v for k, v in legend.items()}
+    scale = chart.get("scale", {})
+    v_max = scale.get("max_value", 100)
+    # Cluster by y into groups (same row = stacked segments)
+    bars.sort(key=lambda b: b["cy"])
+    groups = []
+    for bar in bars:
+        if groups and abs(bar["cy"] - groups[-1][-1]["cy"]) < 8:
+            groups[-1].append(bar)
+        else:
+            groups.append([bar])
+    data = {}
+    for group in groups:
+        row_idx = _match_row(group[0]["cy"], rows)
+        if row_idx is None:
+            continue
+        total_h = sum(b["h"] for b in group)
+        for bar in group:
+            series = _match_series(bar["color"], color_to_series)
+            value = (bar["h"] / total_h) * v_max if total_h > 0 else 0
+            data.setdefault(row_idx, {})[series] = round(value, 1)
+    return data
+
+
+def _merge_to_markdown(template: dict, chart_data: dict, page) -> str:
+    headers = _build_headers(template)
+    if not headers:
+        return ""
+    rows = []
+    for i, row_info in enumerate(template.get("rows", [])):
+        row = [""] * len(headers)
+        # Fill text columns
+        for col in template.get("text_columns", []):
+            cell = _get_text_in_cell(page, col, row_info)
+            idx = col.get("index", 0)
+            if 0 <= idx < len(headers):
+                row[idx] = cell
+        # Fill chart data
+        if i in chart_data:
+            chart_col = _find_chart_column(headers)
+            row[chart_col] = ", ".join(f"{k}:{v}" for k, v in chart_data[i].items())
+        # Inline annotation
+        annotation = _get_row_annotation(page, template.get("annotation_area"), row_info)
+        if annotation:
+            detail_col = _find_detail_column(headers)
+            row[detail_col] = annotation
+        rows.append(row)
+    return _format_md_table(headers, rows)
+
+
+def _build_headers(template: dict) -> list[str]:
+    headers = []
+    for col in template.get("text_columns", []):
+        headers.append(col.get("label") or col.get("type", "Item").title())
+    headers.append("Data")
+    headers.append("Details")
+    return headers
+
+
+def _get_text_in_cell(page, col: dict, row_info: dict) -> str:
+    x0, x1 = col.get("x_range", [0, 0])
+    y_center = row_info.get("y_center", 0)
+    blocks = page.get_text("blocks") or []
+    texts = []
+    for b in blocks:
+        b_cy = (b[1] + b[3]) / 2
+        b_cx = (b[0] + b[2]) / 2
+        if x0 <= b_cx <= x1 and abs(b_cy - y_center) < 12:
+            texts.append(b[4].strip())
+    return " ".join(t for t in texts if t)
+
+
+def _get_row_annotation(page, annotation_area: dict, row_info: dict) -> str:
+    if not annotation_area:
+        return ""
+    x0, x1 = annotation_area.get("x_range", [0, 0])
+    y_center = row_info.get("y_center", 0)
+    blocks = page.get_text("blocks") or []
+    texts = []
+    for b in blocks:
+        b_cy = (b[1] + b[3]) / 2
+        if x0 <= b[0] and b[2] <= x1 and abs(b_cy - y_center) < 12:
+            text = b[4].strip()
+            if text and len(text) > 5:
+                texts.append(text)
+    return "\n".join(texts)
+
+
+def _find_chart_column(headers: list) -> int:
+    for i, h in enumerate(headers):
+        if h.lower() in ("data", "competitive comparison", "value"):
+            return i
+    return max(0, len(headers) - 2)
+
+
+def _find_detail_column(headers: list) -> int:
+    return len(headers) - 1
+
+
+def _format_md_table(headers: list, rows: list) -> str:
+    lines = []
+    lines.append("| " + " | ".join(headers) + " |")
+    lines.append("| " + " | ".join(["---"] * len(headers)) + " |")
+    for row in rows:
+        padded = row + [""] * (len(headers) - len(row))
+        lines.append("| " + " | ".join(c.replace("\n", " ") for c in padded[:len(headers)]) + " |")
+    return "\n".join(lines)
 
 
 def _sort_reading_order(blocks: list[Block]) -> list[Block]:
