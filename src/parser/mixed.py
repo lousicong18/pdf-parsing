@@ -152,6 +152,62 @@ def process_chart_table_page(page, task_id, page_num, doc, metrics_ctx, model_na
     return [block], f"chart_table (fp={fp})"
 
 
+def _is_background_color(fill) -> bool:
+    r, g, b = fill[0], fill[1], fill[2]
+    if r > 0.9 and g > 0.9 and b > 0.9:
+        return True
+    if abs(r - g) < 0.05 and abs(g - b) < 0.05 and r > 0.85:
+        return True
+    return False
+
+
+def _color_distance(c1: tuple, c2: tuple) -> float:
+    return sum((a - b) ** 2 for a, b in zip(c1, c2)) ** 0.5
+
+
+def _collect_colored_shapes(drawings, chart_area: dict) -> list:
+    shapes = []
+    for d in drawings:
+        if d.get("type") not in ("f", "fs"):
+            continue
+        fill = d.get("fill")
+        if not fill or len(fill) < 3:
+            continue
+        if _is_background_color(fill):
+            continue
+        rect = d.get("rect")
+        if not rect:
+            continue
+        if chart_area:
+            cx = (rect.x0 + rect.x1) / 2
+            cy = (rect.y0 + rect.y1) / 2
+            if not (chart_area["x_min"] <= cx <= chart_area["x_max"] and
+                    chart_area["y_min"] <= cy <= chart_area["y_max"]):
+                continue
+        shapes.append({
+            "cx": (rect.x0 + rect.x1) / 2,
+            "cy": (rect.y0 + rect.y1) / 2,
+            "w": rect.x1 - rect.x0,
+            "h": rect.y1 - rect.y0,
+            "color": (round(fill[0], 2), round(fill[1], 2), round(fill[2], 2)),
+        })
+    return shapes
+
+
+def _cluster_by_color(shapes: list, thresh: float = 0.08) -> dict:
+    clusters = {}
+    for s in shapes:
+        matched = False
+        for rep in list(clusters.keys()):
+            if _color_distance(s["color"], rep) < thresh:
+                clusters[rep].append(s)
+                matched = True
+                break
+        if not matched:
+            clusters[s["color"]] = [s]
+    return clusters
+
+
 def _sort_reading_order(blocks: list[Block]) -> list[Block]:
     if len(blocks) <= 1:
         return blocks
