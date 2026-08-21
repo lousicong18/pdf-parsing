@@ -1,12 +1,16 @@
 """Mixed (text + image) page processing."""
 
+import hashlib
+import json
 from typing import Optional
 
 from src.models.schemas import Block, ImageData, PageType
 from src.parser import extract_text, vlm
 from src.store import image_cache
 from src.task_manager import progress_service
-from src.utils import column_detection
+from src.utils import column_detection, pdf_utils
+
+_template_cache: dict[str, dict] = {}
 
 
 def extract_and_describe_images(
@@ -64,13 +68,32 @@ def _image_bbox(page, img) -> list[float]:
         return [0, 0, 0, 0]
 
 
-def process_mixed_page(
-    page, task_id: str, page_num: int, doc, metrics_ctx, model_name: Optional[str] = None,
-) -> list[Block]:
-    text_blocks = extract_text.extract_text(page, "mixed")  # type: ignore[arg-type]
+def process_mixed_page(page, task_id, page_num, doc, metrics_ctx, model_name=None):
+    if _is_chart_table_page(page):
+        blocks, _ = process_chart_table_page(page, task_id, page_num, doc, metrics_ctx, model_name)
+        return blocks
+    text_blocks = extract_text.extract_text(page, "mixed")
     image_blocks = extract_and_describe_images(page, task_id, page_num, doc, metrics_ctx, model_name)
     merged = text_blocks + image_blocks
     return _sort_reading_order(merged)
+
+
+def _is_chart_table_page(page) -> bool:
+    """Detect chart-embedded table page by counting filled shapes."""
+    drawings = page.get_drawings() or []
+    filled = 0
+    for d in drawings:
+        if d.get("type") not in ("f", "fs"):
+            continue
+        fill = d.get("fill")
+        if not fill or len(fill) < 3:
+            continue
+        if fill[0] > 0.85 and fill[1] > 0.85 and fill[2] > 0.85:
+            continue
+        rect = d.get("rect")
+        if rect and 2 <= rect.x1 - rect.x0 <= 100:
+            filled += 1
+    return filled > 30
 
 
 def _sort_reading_order(blocks: list[Block]) -> list[Block]:
