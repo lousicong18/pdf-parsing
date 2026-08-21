@@ -96,6 +96,62 @@ def _is_chart_table_page(page) -> bool:
     return filled > 30
 
 
+def _page_fingerprint(page) -> str:
+    blocks = page.get_text("blocks") or []
+    drawings = page.get_drawings() or []
+    colors = set()
+    for d in drawings:
+        fill = d.get("fill")
+        if fill and len(fill) >= 3:
+            if not (fill[0] > 0.85 and fill[1] > 0.85 and fill[2] > 0.85):
+                colors.add((round(fill[0], 1), round(fill[1], 1), round(fill[2], 1)))
+    feature = f"b={len(blocks)},d={len(drawings)},c={len(colors)}"
+    return hashlib.md5(feature.encode()).hexdigest()[:12]
+
+
+def _vlm_detect_structure(page, task_id, page_num, metrics_ctx, model_name) -> dict:
+    img_bytes = pdf_utils.page_to_png(page, dpi=150)
+    prompt = """Analyze the chart/data visualization in this PDF page.
+
+Identify: chart type (dot/line/bar_horizontal/bar_vertical/bar_stacked/area/pie/scatter/radar),
+chart area, legend (color→name), scale (axis, min, max), and row positions.
+
+Output JSON:
+{
+  "charts": [{"chart_type": "...", "chart_area": {"x_min":0,"x_max":0,"y_min":0,"y_max":0},
+              "legend": {"(r,g,b)": "name"}, "scale": {"axis":"x|y|radius|angle","min_value":0,"max_value":0},
+              "rows": [{"y_center": 0, "label": "..."}]}],
+  "text_columns": [{"x_range": [0,0], "type": "label|annotation|data"}]
+}
+
+Rules: colors 0-1, coordinates in pt, no guessed values."""
+    try:
+        resp = vlm.vlm_describe(img_bytes, metrics_ctx, model_name, prompt=prompt)
+        return json.loads(resp.content)
+    except Exception as e:
+        progress_service.add_error(task_id, page_num, f"VLM structure failed: {e}")
+        return {}
+
+
+def process_chart_table_page(page, task_id, page_num, doc, metrics_ctx, model_name):
+    fp = _page_fingerprint(page)
+    template = _template_cache.get(fp)
+    if template is None:
+        template = _vlm_detect_structure(page, task_id, page_num, metrics_ctx, model_name)
+        _template_cache[fp] = template
+    if not template:
+        return [], "VLM failed"
+    try:
+        chart_data = _extract_chart_data(page, template)
+        markdown = _merge_to_markdown(template, chart_data, page)
+    except NameError:
+        markdown = f"<!-- chart_table placeholder fp={fp} -->"
+    bbox = [0, 0, page.rect.width, page.rect.height]
+    block = Block(type="table", bbox=bbox, page_type="mixed", order=0,
+                  table=None, content=markdown)
+    return [block], f"chart_table (fp={fp})"
+
+
 def _sort_reading_order(blocks: list[Block]) -> list[Block]:
     if len(blocks) <= 1:
         return blocks
