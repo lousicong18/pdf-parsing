@@ -260,6 +260,11 @@ def _classify_with_features(feats: PageFeatures, prev_type: Optional[str] = None
         info(f"table: 跨页上下文 (上页为 table, 本页线条{feats.line_count}>5)")
         return "table"
 
+    # chart-embedded table: many fills (dots/bars/areas) + few grid lines
+    if feats.filled_path_count > 50 and feats.line_count < 20:
+        info(f"chart_table: chart-embedded table (fills={feats.filled_path_count}>50, lines={feats.line_count}<20)")
+        return "mixed"
+
     # mixed
     if feats.images_count > 0 and feats.text_blocks_count > 0:
         info(f"mixed: 图文混排 (图片{feats.images_count}>0, 文本块{feats.text_blocks_count}>0)")
