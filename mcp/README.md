@@ -4,17 +4,10 @@ PDF 图文混排解析 MCP 服务器，供 IDE（Claude Code、Cursor）调用�
 
 ## 安装
 
+一行命令，无需 clone：
+
 ```bash
-# 克隆项目
-git clone https://github.com/lousicong18/pdf-parsing.git
-cd pdf-parsing
-
-# 安装依赖
-uv sync
-
-# 配置 VLM（必填）
-cp .env.example .env
-# 编辑 .env，填写 VLM_BASE_URL / VLM_API_KEY / VLM_MODEL
+uvx --from git+https://github.com/lousicong18/pdf-parsing pdf-parser-mcp
 ```
 
 ## 使用
@@ -27,8 +20,8 @@ cp .env.example .env
 {
   "mcpServers": {
     "pdf-parser": {
-      "command": "uv",
-      "args": ["--directory", "/path/to/pdf-parsing", "run", "python", "-m", "src.mcp_server"],
+      "command": "uvx",
+      "args": ["--from", "git+https://github.com/lousicong18/pdf-parsing", "pdf-parser-mcp"],
       "env": {
         "VLM_BASE_URL": "https://api.minimaxi.com/v1",
         "VLM_API_KEY": "${VLM_API_KEY}",
@@ -38,6 +31,8 @@ cp .env.example .env
   }
 }
 ```
+
+> `${VLM_API_KEY}` 从 shell 环境变量展开，避免明文密钥写入配置文件。
 
 > 配置完成后，在对话中直接说"解析这个 PDF"即可调用。
 
