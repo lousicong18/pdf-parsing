@@ -6,8 +6,10 @@ into PageResult.features by the caller.
 
 from typing import Optional
 
-from src.models.schemas import Block, PageFeatures, PageRaw
-from src.parser import classify, extract_table, extract_text, mixed, scan
+from src.models.schemas import Block, ImageData, PageFeatures, PageRaw
+from src.parser import classify, extract_table, extract_text, mixed, scan, mineru_parser, vlm
+from src.store import image_cache
+from src.task_manager import progress_service
 from src.utils import column_detection
 
 
@@ -28,21 +30,92 @@ def dispatch_page(
     else:
         raw = PageRaw()
     blocks = []
+
     if page_type == "text":
-        blocks = extract_text.extract_text(page, page_type)  # type: ignore[arg-type]
+        blocks = _dispatch_text_table(page, page_type, doc.name, page_num)
         features.columns = column_detection.column_detection(blocks)
     elif page_type == "table":
-        blocks = extract_table.extract_tables(
-            page, page_type, doc.name, page_num, prev_type, prev_header, task_id, metrics_ctx, model_name,  # type: ignore[arg-type]
-        )
+        blocks = _dispatch_text_table(page, page_type, doc.name, page_num)
         # 表格页面也可能有表格外的图片，补充提取
         blocks = _extract_outside_images(blocks, page, task_id, page_num, doc, metrics_ctx, model_name)
     elif page_type == "mixed":
-        blocks = mixed.process_mixed_page(page, task_id, page_num, doc, metrics_ctx, model_name)
+        if mixed._is_chart_table_page(page):
+            blocks, _ = mixed.process_chart_table_page(page, task_id, page_num, doc, metrics_ctx, model_name)
+        else:
+            blocks = _dispatch_mixed_with_images(page, page_type, doc, task_id, page_num, metrics_ctx, model_name)
         features.columns = column_detection.column_detection(blocks)
     elif page_type == "scan":
         blocks = scan.process_scan_page(page, task_id, page_num, metrics_ctx, model_name)
     return blocks, features, raw
+
+
+def _dispatch_text_table(page, page_type: str, pdf_path: str, page_num: int,
+                         task_id: str = "", doc=None, metrics_ctx=None,
+                         model_name: Optional[str] = None) -> list[Block]:
+    """Route text/table/mixed pages to MinerU if available, else fallback."""
+    if mineru_parser.is_mineru_available():
+        blocks = mineru_parser.process_with_mineru(pdf_path, page_num, page_type)
+        if blocks:
+            # 对 MinerU 输出的 image block 调 VLM 描述
+            if page_type == "mixed" and task_id and doc:
+                blocks = _describe_mineru_images(blocks, page, task_id, page_num, doc, metrics_ctx, model_name)
+            return blocks
+    # Fallback to original extractors
+    if page_type == "text":
+        return extract_text.extract_text(page, page_type)
+    return extract_table.extract_tables(
+        page, page_type, pdf_path, page_num, None, None, None, None, None,
+    )
+
+
+def _dispatch_mixed_with_images(page, page_type: str, doc, task_id: str, page_num: int,
+                                 metrics_ctx, model_name: Optional[str]) -> list[Block]:
+    """处理普通图文页：MinerU 提取结构 + VLM 描述图片。"""
+    # 1. MinerU 提取文字/结构
+    blocks: list[Block] = []
+    if mineru_parser.is_mineru_available():
+        blocks = mineru_parser.process_with_mineru(doc.name, page_num, page_type)
+    if not blocks:
+        # fallback 到原提取器
+        text_blocks = extract_text.extract_text(page, page_type)
+        image_blocks = mixed.extract_and_describe_images(page, task_id, page_num, doc, metrics_ctx, model_name)
+        return _sort_reading_order(text_blocks + image_blocks)
+    # 2. MinerU 提取成功后，补充页面中的图片（MinerU 可能忽略小图）
+    page_images = page.get_images(full=True) or []
+    if not page_images:
+        return blocks
+    existing_img_bboxes = [b.bbox for b in blocks if b.type == "image"]
+    new_image_blocks: list[Block] = []
+    for idx, img in enumerate(page_images):
+        bbox = mixed._image_bbox(page, img)
+        # 已有 MinerU 处理的图片则跳过
+        if any(_bbox_overlap_ratio(bbox, eb) > 0.5 for eb in existing_img_bboxes if eb):
+            continue
+        try:
+            image_bytes = doc.extract_image(img[0])["image"]
+        except Exception:
+            continue
+        image_cache.put(task_id, page_num, idx, image_bytes)
+        url = f"/api/v1/tasks/{task_id}/images/{page_num}/{idx}"
+        try:
+            desc = vlm.vlm_describe(image_bytes, metrics_ctx, model_name)
+        except Exception:
+            desc = "图片未识别（VLM 调用失败）"
+        new_image_blocks.append(
+            Block(
+                type="image",
+                bbox=bbox,
+                page_type=page_type,
+                order=len(blocks) + len(new_image_blocks),
+                image=ImageData(description=desc, image_url=url),
+                image_url=url,
+                content=desc,
+            )
+        )
+    if new_image_blocks:
+        blocks = blocks + new_image_blocks
+        blocks = _sort_reading_order(blocks)
+    return blocks
 
 
 def _extract_outside_images(

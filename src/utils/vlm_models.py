@@ -13,6 +13,7 @@ class ModelConfig(BaseModel):
     base_url: str
     api_key: str
     model: str
+    thinking: Optional[dict] = None
 
 
 def load_registry(path: Optional[str] = None) -> dict[str, ModelConfig]:

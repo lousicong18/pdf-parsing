@@ -127,7 +127,7 @@ def classify_page(page, prev_type: Optional[str] = None, pdf_path: str = "", pag
         feats.text_blocks_count >= 10 and 5 <= feats.line_count <= 10
         and feats.text_blocks_count > feats.line_count * 2 and feats.text_blocks_count <= 50
     )
-    if page_type != "table" and probe_trigger and pdf_path:
+    if page_type != "table" and page_type != "mixed" and probe_trigger and pdf_path:
         log.append(f"探针兜底触发: 尝试提取表格验证")
         if _probe_has_tables(page, pdf_path, page_num):
             page_type = "table"

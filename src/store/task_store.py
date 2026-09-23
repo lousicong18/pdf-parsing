@@ -103,6 +103,20 @@ def set_metrics(task_id: str, metrics: TaskMetrics) -> None:
             _persist()
 
 
+def clear_all() -> int:
+    """Delete all tasks. Returns count removed."""
+    with _lock:
+        count = len(_store)
+        _store.clear()
+        _persist()
+    for pdf in project_root().glob("temp/*.pdf"):
+        try:
+            pdf.unlink()
+        except Exception:
+            pass
+    return count
+
+
 def delete(task_id: str) -> bool:
     """Delete a task from store. Returns True if existed."""
     with _lock:

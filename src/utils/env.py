@@ -17,7 +17,7 @@ MAX_FILE_MB = int(os.getenv("MAX_FILE_MB", "50"))
 
 # Server
 HOST = os.getenv("HOST", "0.0.0.0")
-PORT = int(os.getenv("PORT", "8082"))
+PORT = int(os.getenv("PORT", "8083"))
 
 # Classification thresholds
 CLS_LINE_COUNT_TABLE = int(os.getenv("CLS_LINE_COUNT_TABLE", "20"))
@@ -26,6 +26,15 @@ CLS_LINE_COUNT_TEXT = int(os.getenv("CLS_LINE_COUNT_TEXT", "20"))
 CLS_AREA_RATIO_MIN = float(os.getenv("CLS_AREA_RATIO_MIN", "0.15"))
 CLS_DRAWINGS_PATH_MIXED = int(os.getenv("CLS_DRAWINGS_PATH_MIXED", "200"))
 CLS_VLM_FALLBACK = os.getenv("CLS_VLM_FALLBACK", "off")
+
+# OSS (optional)
+OSS_ENABLED = os.getenv("OSS_ENABLED", "off")
+OSS_PROVIDER = os.getenv("OSS_PROVIDER", "aliyun")
+OSS_BUCKET = os.getenv("OSS_BUCKET", "")
+OSS_ENDPOINT = os.getenv("OSS_ENDPOINT", "")
+OSS_ACCESS_KEY = os.getenv("OSS_ACCESS_KEY", "")
+OSS_SECRET_KEY = os.getenv("OSS_SECRET_KEY", "")
+OSS_PREFIX = os.getenv("OSS_PREFIX", "tasks/")
 
 # Research / evaluation layer
 TABLE_EXTRACTOR = os.getenv("TABLE_EXTRACTOR", "hybrid")

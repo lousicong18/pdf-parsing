@@ -1,6 +1,8 @@
 # Sensitive config (API keys)
 .env
 models.json
+.mcp.json
+.claude/
 
 # Python
 __pycache__/

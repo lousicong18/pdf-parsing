@@ -41,6 +41,10 @@ function copyMarkdown() {
       </table>
     </div>
 
+    <div v-else-if="block.content" class="table-fallback" data-test="table-fallback">
+      <pre class="markdown-content">{{ block.content }}</pre>
+    </div>
+
     <div v-else class="table-fallback" data-test="table-fallback">
       <el-alert type="info" :closable="false" title="无结构化表格数据" />
     </div>
@@ -62,5 +66,14 @@ function copyMarkdown() {
 }
 .table-fallback {
   margin: $spacing-sm 0;
+}
+.markdown-content {
+  white-space: pre-wrap;
+  font-family: monospace;
+  font-size: 12px;
+  margin: 0;
+  padding: $spacing-sm;
+  background: var(--el-fill-color-light);
+  border-radius: 4px;
 }
 </style>

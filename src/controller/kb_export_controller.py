@@ -1,10 +1,13 @@
 """GET /api/v1/tasks/{task_id}/export-kb — 知识库优化导出（按 token 切块 + 表格增强 + 元数据）。"""
 
+from typing import Optional
+
 from fastapi import APIRouter, Query
 
 from src.models.schemas import Block, ErrorResponse
 from src.parser.extract_table import tables_to_markdown
-from src.store import task_store
+from src.store import image_cache, task_store
+from src.utils import oss_client
 from src.utils.errors import AppError
 
 router = APIRouter(tags=["export"])
@@ -40,7 +43,7 @@ def export_kb(
     }
 
 
-def _build_segments(result, chunk_tokens: int, overlap_tokens: int) -> list[dict]:
+def _build_segments(result, chunk_tokens: int, overlap_tokens: int, include_images: bool = False) -> list[dict]:
     """将每页的 block 转为增强文本段（带表格标题、合并单元格填充）。"""
     segments: list[dict] = []
     for page in result.pages:
@@ -60,8 +63,28 @@ def _build_segments(result, chunk_tokens: int, overlap_tokens: int) -> list[dict
             elif block.type == "image":
                 text = (block.content or "").strip()
                 if text:
-                    segments.append({"text": text, "page": page.page, "type": "image"})
+                    segment = {"text": text, "page": page.page, "type": "image"}
+                    if include_images:
+                        oss_url = _upload_image_to_oss(result.task_id, page.page, block)
+                        if oss_url:
+                            segment["text"] += f"\n\n![{text}]({oss_url})"
+                    segments.append(segment)
     return segments
+
+
+def _upload_image_to_oss(task_id: str, page: int, block: Block) -> Optional[str]:
+    """上传图片块到 OSS，返回公网 URL。失败返回 None。"""
+    if not block.image_url:
+        return None
+    try:
+        parts = block.image_url.rstrip("/").split("/")
+        index = int(parts[-1])
+    except (ValueError, IndexError):
+        return None
+    data = image_cache.get(task_id, page, index)
+    if data is None:
+        return None
+    return oss_client.upload_image(task_id, page, index, data)
 
 
 def _find_table_title(block: Block, prev_text: str) -> str:

@@ -1,0 +1,356 @@
+{
+  "page24": {
+    "page_width": 960.0,
+    "page_height": 540.0,
+    "results": {
+      "dpi_150": {
+        "dpi": 150,
+        "image_size_kb": 372.4,
+        "latency_seconds": 10.72,
+        "response_length": 2800,
+        "parsed_json": {
+          "text_content": "Total Market | Product Satisfaction KPI | VOLKSWAGEN GROUP CHINA | Details Satisfaction with Product – VW & Competitors | Brands Overall | Grouped by topics | Competitive Comparison | Best in market (2024) | Score | Comfort: Driving position, Quality of ride, Ease of entry into & out of car, Interior versatility, Accessibility & comfort of third row seats, Overall seating comfort | Cost-effectiveness / consumption: Level of equipment, Value for money, Environmental friendliness, Fuel economy/ energy efficiency | Driving characteristics: Acceleration, Roadholding, Braking, Sportiness, Overall off road performance | Ease of use: All round visibility, Manoeuvrability, Heating / ventilation / air conditioning, Easy to read and use instr./ controls/ displays, Easy to use inf. & entertainment system inc. in-car apps | Miscellaneous: Safety, Manufacturer reputation, Features of inf. & entertainment system inc. in-car apps | Quality / reliability: Integrated navigation system, Smartphone integration/ connectivity, Reliability, Quietness when driving, Freedom from faults/ squeaks/ rattles, Overall build quality | Roominess / storage: Interior storage, Front interior roominess, Rear interior roominess, Luggage capacity, Access to luggage space | Styling / appearance: Exterior styling, Interior styling, Quality of interior | Other: Range of fuel types offered, Choice of options / extras offered | EV characteristics: Electric range, Electric charging time, Accuracy of predicted range remaining, Charging at home, Charging at work, Public charging | BMW⁵, Maserati, Porsche 8.7 | Maserati 8.8 | Avatr⁵ 8.8 | Avatr⁵ 8.7 | Land Rover 8.2 | Avatr 8.9 | Avatr 8.9 | AITO⁵, Avatr⁵, Porsche, Xiaomi⁵ 8.7 | Avatr 8.8 | Xiaomi⁵ 8.5 | Tesla⁵ 8.8 | Avatr⁵ 8.8 | Avatr⁵ 8.9 | Audi⁵, Jeep, Porsche 8.7 | Jeep, Porsche 8.6 | Jeep, Porsche 8.8 | Maserati 8.8 | Maserati, Tesla⁵ 8.7 | Avatr⁵ 8.7 | NIO⁵ 8.7 | Avatr⁵ 8.9 | Porsche 8.9 | NIO⁵ 8.7 | AITO⁵ 8.7 | IM⁵, NIO⁵ 8.7 | Maserati 8.9 | Porsche 8.7 | Porsche 8.7 | Porsche 8.9 | Maserati 8.7 | Avatr⁵ 8.8 | Avatr⁵ 8.8 | Jeep, Porsche, Xiaomi⁵ 8.6 | Avatr⁵ 8.7 | Porsche 9.1 | Avatr⁵, Porsche 8.9 | Porsche 8.7 | Porsche 8.7 | Avatr⁵ 8.7 | Avatr⁵, Tesla⁵ 8.6 | Avatr 8.6 | Tesla⁵, Volkswagen⁵ 8.5 | Avatr⁵ 8.7 | Porsche 8.7 | BAIC⁵, Porsche 8.5 | Total market | Volkswagen | Toyota | Honda | 5 Street recruited | Better than competitors | Scale: 7.0, 7.5, 8.0, 8.5, 9.0, 9.5 | Source: NCBS China (Brands Overall) 2024 | C-VC | NCBS China 2024FY Volkswagen Group Report | CSD-class 8.3-15 years | CONFIDENTIAL VERTRAULICH | Group Market Research and Customer Insight | INTERNAL | Page 24",
+          "chart_type": "dot",
+          "row_count": 47,
+          "sample_values": [
+            "8.7",
+            "8.8",
+            "8.9",
+            "9.1",
+            "8.5",
+            "8.6"
+          ],
+          "confidence": "high"
+        },
+        "raw_response": "```json\n{\n  \"text_content\": \"Total Market | Product Satisfaction KPI | VOLKSWAGEN GROUP CHINA | Details Satisfaction with Product – VW & Competitors | Brands Overall | Grouped by topics | Competitive Comparison | Best in market (2024) | Score | Comfort: Driving position, Quality of ride, Ease of entry into & out of car, Interior versatility, Accessibility & comfort of third row seats, Overall seating comfort | Cost-effectiveness / consumption: Level of equipment, Value for money, Environmental friendliness, Fuel economy/ energy efficiency | Driving characteristics: Acceleration, Roadholding, Braking, Sportiness, Overall off road performance | Ease of use: All round visibility, Manoeuvrability, Heating / ventilation / air conditioning, Easy to read and use instr./ controls/ displays, Easy to use inf. & entertainment system inc. in-car apps | Miscellaneous: Safety, Manufacturer reputation, Features of inf. & entertainment system inc. in-car apps | Quality / reliability: Integrated navigation system, Smartphone integration/ connectivity, Reliability, Quietness when driving, Freedom from faults/ squeaks/ rattles, Overall build quality | Roominess / storage: Interior storage, Front interior roominess, Rear interior roominess, Luggage capacity, Access to luggage space | Styling / appearance: Exterior styling, Interior styling, Quality of interior | Other: Range of fuel types offered, Choice of options / extras offered | EV characteristics: Electric range, Electric charging time, Accuracy of predicted range remaining, Charging at home, Charging at work, Public charging | BMW⁵, Maserati, Porsche 8.7 | Maserati 8.8 | Avatr⁵ 8.8 | Avatr⁵ 8.7 | Land Rover 8.2 | Avatr 8.9 | Avatr 8.9 | AITO⁵, Avatr⁵, Porsche, Xiaomi⁵ 8.7 | Avatr 8.8 | Xiaomi⁵ 8.5 | Tesla⁵ 8.8 | Avatr⁵ 8.8 | Avatr⁵ 8.9 | Audi⁵, Jeep, Porsche 8.7 | Jeep, Porsche 8.6 | Jeep, Porsche 8.8 | Maserati 8.8 | Maserati, Tesla⁵ 8.7 | Avatr⁵ 8.7 | NIO⁵ 8.7 | Avatr⁵ 8.9 | Porsche 8.9 | NIO⁵ 8.7 | AITO⁵ 8.7 | IM⁵, NIO⁵ 8.7 |"
+      },
+      "dpi_200": {
+        "dpi": 200,
+        "image_size_kb": 532.6,
+        "latency_seconds": 11.7,
+        "response_length": 3662,
+        "parsed_json": {
+          "text_content": "Total Market | Product Satisfaction KPI\nVolkswagen Group China\nDetails Satisfaction with Product – VW & Competitors\nGrouped by topics\n\nComfort: Driving position, Quality of ride, Ease of entry into & out of car, Interior versatility, Accessibility & comfort of third row seats, Overall seating comfort\nCost-effectiveness / consumption: Level of equipment, Value for money, Environmental friendliness, Fuel economy/ energy efficiency\nDriving characteristics: Acceleration, Roadholding, Braking, Sportiness, Overall off road performance\nEase of use: All round visibility, Manoeuvrability, Heating / ventilation / air conditioning, Easy to read and use instr./ controls/ displays, Easy to use inf. & entertainment system inc. in-car apps\nMiscellaneous: Safety, Manufacturer reputation, Features of inf. & entertainment system inc. in-car apps, Integrated navigation system, Smartphone integration/ connectivity\nQuality / reliability: Reliability, Quietness when driving, Freedom from faults/ squeaks/ rattles, Overall build quality\nRoominess / storage: Interior storage, Front interior roominess, Rear interior roominess, Luggage capacity, Access to luggage space\nStyling / appearance: Exterior styling, Interior styling, Quality of interior\nOther: Range of fuel types offered, Choice of options / extras offered\nEV characteristics: Electric range, Electric charging time, Accuracy of predicted range remaining, Charging at home, Charging at work, Public charging\n\nBest in market (2024) | Score:\n- Driving position: BMW⁵, Maserati, Porsche 8.7\n- Quality of ride: Maserati 8.8\n- Ease of entry: Avatr⁵ 8.8\n- Interior versatility: Avatr⁵ 8.7\n- Accessibility & comfort of third row seats: Land Rover 8.2\n- Overall seating comfort: Avatr 8.9\n- Level of equipment: Avatr 8.9\n- Value for money: AITO⁵, Avatr⁵, Porsche, Xiaomi⁵ 8.7\n- Environmental friendliness: Avatr 8.8\n- Fuel economy/energy efficiency: Xiaomi⁵ 8.5\n- Acceleration: Tesla⁵ 8.8\n- Roadholding: Avatr⁵ 8.8\n- Braking: Avatr⁵ 8.9\n- Sportiness: Audi⁵, Jeep, Porsche 8.7\n- Overall off road performance: Jeep, Porsche 8.6\n- All round visibility: Jeep, Porsche 8.8\n- Manoeuvrability: Maserati 8.8\n- Heating/ventilation: Maserati, Tesla⁵ 8.7\n- Easy to read and use controls: Avatr⁵ 8.7\n- Easy to use inf. & entertainment: NIO⁵ 8.7\n- Safety: Avatr⁵ 8.9\n- Manufacturer reputation: Porsche 8.9\n- Features inf. & entertainment: NIO⁵ 8.7\n- Integrated navigation system: AITO⁵ 8.7\n- Smartphone integration: IM⁵, NIO⁵ 8.7\n- Reliability: Maserati 8.9\n- Quietness when driving: Porsche 8.7\n- Freedom from faults: Porsche 8.7\n- Overall build quality: Porsche 8.9\n- Interior storage: Maserati 8.7\n- Front interior roominess: Avatr⁵ 8.8\n- Rear interior roominess: Avatr⁵ 8.8\n- Luggage capacity: Jeep, Porsche, Xiaomi⁵ 8.6\n- Access to luggage space: Avatr⁵ 8.7\n- Exterior styling: Porsche 9.1\n- Interior styling: Avatr⁵, Porsche 8.9\n- Quality of interior: Porsche 8.7\n- Range of fuel types: Porsche 8.7\n- Choice of options: Avatr⁵ 8.7\n- Electric range: Avatr⁵, Tesla⁵ 8.6\n- Electric charging time: Avatr 8.6\n- Accuracy of predicted range: Tesla⁵, Volkswagen⁵ 8.5\n- Charging at home: Avatr⁵ 8.7\n- Charging at work: Porsche 8.7\n- Public charging: BAIC⁵, Porsche 8.5\n\n5 Street recruited | Better than competitors\nGroup Market Research and Customer Insight\nSource: NCBS China (Brands Overall) 2024\nC-VC | NCBS China 2024FY Volkswagen Group Report | CSD-class 8.3-15 years\nCONFIDENTIAL VERTRAULICH\n24",
+          "chart_type": "dot",
+          "row_count": 37,
+          "sample_values": [
+            "8.7",
+            "8.8",
+            "8.5",
+            "8.9",
+            "9.1",
+            "8.6"
+          ],
+          "confidence": "high"
+        },
+        "raw_response": "```json\n{\n  \"text_content\": \"Total Market | Product Satisfaction KPI\\nVolkswagen Group China\\nDetails Satisfaction with Product – VW & Competitors\\nGrouped by topics\\n\\nComfort: Driving position, Quality of ride, Ease of entry into & out of car, Interior versatility, Accessibility & comfort of third row seats, Overall seating comfort\\nCost-effectiveness / consumption: Level of equipment, Value for money, Environmental friendliness, Fuel economy/ energy efficiency\\nDriving characteristics: Acceleration, Roadholding, Braking, Sportiness, Overall off road performance\\nEase of use: All round visibility, Manoeuvrability, Heating / ventilation / air conditioning, Easy to read and use instr./ controls/ displays, Easy to use inf. & entertainment system inc. in-car apps\\nMiscellaneous: Safety, Manufacturer reputation, Features of inf. & entertainment system inc. in-car apps, Integrated navigation system, Smartphone integration/ connectivity\\nQuality / reliability: Reliability, Quietness when driving, Freedom from faults/ squeaks/ rattles, Overall build quality\\nRoominess / storage: Interior storage, Front interior roominess, Rear interior roominess, Luggage capacity, Access to luggage space\\nStyling / appearance: Exterior styling, Interior styling, Quality of interior\\nOther: Range of fuel types offered, Choice of options / extras offered\\nEV characteristics: Electric range, Electric charging time, Accuracy of predicted range remaining, Charging at home, Charging at work, Public charging\\n\\nBest in market (2024) | Score:\\n- Driving position: BMW⁵, Maserati, Porsche 8.7\\n- Quality of ride: Maserati 8.8\\n- Ease of entry: Avatr⁵ 8.8\\n- Interior versatility: Avatr⁵ 8.7\\n- Accessibility & comfort of third row seats: Land Rover 8.2\\n- Overall seating comfort: Avatr 8.9\\n- Level of equipment: Avatr 8.9\\n- Value for money: AITO⁵, Avatr⁵, Porsche, Xiaomi⁵ 8.7\\n- Environmental friendliness: Avatr 8.8\\n- Fuel economy/energy efficiency: Xiaomi⁵ 8.5\\n- Acceleration: Tesla⁵ 8.8\\n- Roadhol"
+      },
+      "dpi_300": {
+        "dpi": 300,
+        "image_size_kb": 876.4,
+        "latency_seconds": 12.78,
+        "response_length": 2973,
+        "parsed_json": {
+          "text_content": "Total Market | Product Satisfaction KPI\nVOLKSWAGEN GROUP CHINA\nDetails Satisfaction with Product – VW & Competitors\nGrouped by topics | Competitive Comparison | Best in market (2024) | Score | Brands Overall\n\nComfort:\n- Driving position | BMW⁵, Maserati, Porsche | 8.7\n- Quality of ride | Maserati | 8.8\n- Ease of entry into & out of car | Avatr⁵ | 8.8\n- Interior versatility | Avatr⁵ | 8.7\n- Accessibility & comfort of third row seats | Land Rover | 8.2\n- Overall seating comfort | Avatr | 8.9\n\nCost-effectiveness / consumption:\n- Level of equipment | Avatr | 8.9\n- Value for money | AITO⁵, Avatr⁵, Porsche, Xiaomi⁵ | 8.7\n- Environmental friendliness | Avatr | 8.8\n- Fuel economy/ energy efficiency | Xiaomi⁵ | 8.5\n\nDriving characteristics:\n- Acceleration | Tesla⁵ | 8.8\n- Roadholding | Avatr⁵ | 8.8\n- Braking | Avatr⁵ | 8.9\n- Sportiness | Audi⁵, Jeep, Porsche | 8.7\n- Overall off road performance | Jeep, Porsche | 8.6\n\nEase of use:\n- All round visibility | Jeep, Porsche | 8.8\n- Manoeuvrability | Maserati | 8.8\n- Heating / ventilation / air conditioning | Maserati, Tesla⁵ | 8.7\n- Easy to read and use instr./ controls/ displays | Avatr⁵ | 8.7\n- Easy to use inf. & entertainment system inc. in-car apps | NIO⁵ | 8.7\n\nMiscellaneous:\n- Safety | Avatr⁵ | 8.9\n- Manufacturer reputation | Porsche | 8.9\n- Features of inf. & entertainment system inc. in-car apps | NIO⁵ | 8.7\n- Integrated navigation system | AITO⁵ | 8.7\n- Smartphone integration/ connectivity | IM⁵, NIO⁵ | 8.7\n\nQuality / reliability:\n- Reliability | Maserati | 8.9\n- Quietness when driving | Porsche | 8.7\n- Freedom from faults/ squeaks/ rattles | Porsche | 8.7\n- Overall build quality | Porsche | 8.9\n\nRoominess / storage:\n- Interior storage | Maserati | 8.7\n- Front interior roominess | Avatr⁵ | 8.8\n- Rear interior roominess | Avatr⁵ | 8.8\n- Luggage capacity | Jeep, Porsche, Xiaomi⁵ | 8.6\n- Access to luggage space | Avatr⁵ | 8.7\n\nStyling / appearance:\n- Exterior styling | Porsche | 9.1\n- Interior styling | Avatr⁵, Porsche | 8.9\n- Quality of interior | Porsche | 8.7\n\nOther:\n- Range of fuel types offered | Porsche | 8.7\n- Choice of options / extras offered | Avatr⁵ | 8.7\n\nEV characteristics:\n- Electric range | Avatr⁵, Tesla⁵ | 8.6\n- Electric charging time | Avatr | 8.6\n- Accuracy of predicted range remaining | Tesla⁵, Volkswagen⁵ | 8.5\n- Charging at home | Avatr⁵ | 8.7\n- Charging at work | Porsche | 8.7\n- Public charging | BAIC⁵, Porsche | 8.5\n\nLegend: Total market, Volkswagen, Toyota, Honda\n5 Street recruited | Better than competitors\nSource: NCBS China (Brands Overall) 2024\nGroup Market Research and Customer Insight\nC-VC | NCBS China 2024FY Volkswagen Group Report | CSD-class 8.3-15 years\nCONFIDENTIAL VERTRAULICH | INTERNAL | 24",
+          "chart_type": "bar_horizontal",
+          "row_count": 42,
+          "sample_values": [
+            "8.7",
+            "8.8",
+            "8.9",
+            "8.2",
+            "8.5",
+            "8.6",
+            "9.1"
+          ],
+          "confidence": "high"
+        },
+        "raw_response": "```json\n{\n  \"text_content\": \"Total Market | Product Satisfaction KPI\\nVOLKSWAGEN GROUP CHINA\\nDetails Satisfaction with Product – VW & Competitors\\nGrouped by topics | Competitive Comparison | Best in market (2024) | Score | Brands Overall\\n\\nComfort:\\n- Driving position | BMW⁵, Maserati, Porsche | 8.7\\n- Quality of ride | Maserati | 8.8\\n- Ease of entry into & out of car | Avatr⁵ | 8.8\\n- Interior versatility | Avatr⁵ | 8.7\\n- Accessibility & comfort of third row seats | Land Rover | 8.2\\n- Overall seating comfort | Avatr | 8.9\\n\\nCost-effectiveness / consumption:\\n- Level of equipment | Avatr | 8.9\\n- Value for money | AITO⁵, Avatr⁵, Porsche, Xiaomi⁵ | 8.7\\n- Environmental friendliness | Avatr | 8.8\\n- Fuel economy/ energy efficiency | Xiaomi⁵ | 8.5\\n\\nDriving characteristics:\\n- Acceleration | Tesla⁵ | 8.8\\n- Roadholding | Avatr⁵ | 8.8\\n- Braking | Avatr⁵ | 8.9\\n- Sportiness | Audi⁵, Jeep, Porsche | 8.7\\n- Overall off road performance | Jeep, Porsche | 8.6\\n\\nEase of use:\\n- All round visibility | Jeep, Porsche | 8.8\\n- Manoeuvrability | Maserati | 8.8\\n- Heating / ventilation / air conditioning | Maserati, Tesla⁵ | 8.7\\n- Easy to read and use instr./ controls/ displays | Avatr⁵ | 8.7\\n- Easy to use inf. & entertainment system inc. in-car apps | NIO⁵ | 8.7\\n\\nMiscellaneous:\\n- Safety | Avatr⁵ | 8.9\\n- Manufacturer reputation | Porsche | 8.9\\n- Features of inf. & entertainment system inc. in-car apps | NIO⁵ | 8.7\\n- Integrated navigation system | AITO⁵ | 8.7\\n- Smartphone integration/ connectivity | IM⁵, NIO⁵ | 8.7\\n\\nQuality / reliability:\\n- Reliability | Maserati | 8.9\\n- Quietness when driving | Porsche | 8.7\\n- Freedom from faults/ squeaks/ rattles | Porsche | 8.7\\n- Overall build quality | Porsche | 8.9\\n\\nRoominess / storage:\\n- Interior storage | Maserati | 8.7\\n- Front interior roominess | Avatr⁵ | 8.8\\n- Rear interior roominess | Avatr⁵ | 8.8\\n- Luggage capacity | Jeep, Porsche, Xiaomi⁵ | 8.6\\n- Access to luggage space | Avatr⁵ | 8.7\\n\\nStyling / appeara"
+      },
+      "dpi_400": {
+        "dpi": 400,
+        "image_size_kb": 1181.4,
+        "latency_seconds": 9.25,
+        "response_length": 2042,
+        "parsed_json": {
+          "text_content": "Total Market | Product Satisfaction KPI | VOLKSWAGEN GROUP CHINA | Details Satisfaction with Product – VW & Competitors | Brands Overall | Grouped by topics | Competitive Comparison | Best in market (2024) | Score | Comfort: Driving position, Quality of ride, Ease of entry into & out of car, Interior versatility, Accessibility & comfort of third row seats, Overall seating comfort | Cost-effectiveness / consumption: Level of equipment, Value for money, Environmental friendliness, Fuel economy/ energy efficiency | Driving characteristics: Acceleration, Roadholding, Braking, Sportiness, Overall off road performance | Ease of use: All round visibility, Manoeuvrability, Heating / ventilation / air conditioning, Easy to read and use instr./ controls/ displays, Easy to use inf. & entertainment system inc. in-app apps | Miscellaneous: Safety, Manufacturer reputation, Features of inf. & entertainment system inc. in-car apps, Integrated navigation system, Smartphone integration/ connectivity | Quality / reliability: Reliability, Quietness when driving, Freedom from faults/ squeaks/ rattles, Overall build quality | Roominess / storage: Interior storage, Front interior roominess, Rear interior roominess, Luggage capacity, Access to luggage space | Styling / appearance: Exterior styling, Interior styling, Quality of interior | Other: Range of fuel types offered, Choice of options / extras offered | EV characteristics: Electric range, Electric charging time, Accuracy of predicted range remaining, Charging at home, Charging at work, Public charging | Legend: Total market, Volkswagen, Toyota, Honda | 5 Street recruited | Better than competitors | Source: NCBS China (Brands Overall) 2024 | C-VC | NCBS China 2024FY Volkswagen Group Report | CSD-class 8.3-15 years | INTERNAL | Group Market Research and Customer Insight | CONFIDENTIAL VERTRAULICH | 24",
+          "chart_type": "dot",
+          "row_count": 47,
+          "sample_values": [
+            "8.7",
+            "8.8",
+            "8.9",
+            "9.1",
+            "8.5",
+            "8.6",
+            "7.0",
+            "9.5"
+          ],
+          "confidence": "high"
+        },
+        "raw_response": "```json\n{\n  \"text_content\": \"Total Market | Product Satisfaction KPI | VOLKSWAGEN GROUP CHINA | Details Satisfaction with Product – VW & Competitors | Brands Overall | Grouped by topics | Competitive Comparison | Best in market (2024) | Score | Comfort: Driving position, Quality of ride, Ease of entry into & out of car, Interior versatility, Accessibility & comfort of third row seats, Overall seating comfort | Cost-effectiveness / consumption: Level of equipment, Value for money, Environmental friendliness, Fuel economy/ energy efficiency | Driving characteristics: Acceleration, Roadholding, Braking, Sportiness, Overall off road performance | Ease of use: All round visibility, Manoeuvrability, Heating / ventilation / air conditioning, Easy to read and use instr./ controls/ displays, Easy to use inf. & entertainment system inc. in-app apps | Miscellaneous: Safety, Manufacturer reputation, Features of inf. & entertainment system inc. in-car apps, Integrated navigation system, Smartphone integration/ connectivity | Quality / reliability: Reliability, Quietness when driving, Freedom from faults/ squeaks/ rattles, Overall build quality | Roominess / storage: Interior storage, Front interior roominess, Rear interior roominess, Luggage capacity, Access to luggage space | Styling / appearance: Exterior styling, Interior styling, Quality of interior | Other: Range of fuel types offered, Choice of options / extras offered | EV characteristics: Electric range, Electric charging time, Accuracy of predicted range remaining, Charging at home, Charging at work, Public charging | Legend: Total market, Volkswagen, Toyota, Honda | 5 Street recruited | Better than competitors | Source: NCBS China (Brands Overall) 2024 | C-VC | NCBS China 2024FY Volkswagen Group Report | CSD-class 8.3-15 years | INTERNAL | Group Market Research and Customer Insight | CONFIDENTIAL VERTRAULICH | 24\",\n  \"chart_type\": \"dot\",\n  \"row_count\": 47,\n  \"sample_values\": [\"8.7\", \"8.8\", \"8.9\", \"9.1\", \"8.5\", \"8.6\", \""
+      }
+    }
+  },
+  "page38": {
+    "page_width": 960.0,
+    "page_height": 540.0,
+    "results": {
+      "dpi_150": {
+        "dpi": 150,
+        "image_size_kb": 272.6,
+        "latency_seconds": 9.08,
+        "response_length": 1600,
+        "parsed_json": {
+          "text_content": "Total Market | Dealer Satisfaction KPI\nVOLKSWAGEN GROUP CHINA\nSatisfaction with Dealer – Brand Overall\nBrands Overall\nRanking by brands 2024 | In 2024 | VS 2023\n# | Ø subset | (values) | (values)\n1s | Avatr | 8.8s | —1,s\n1 | Mercedes | 8.8 | (0)\n1 | Porsche | 8.8 | (0)\n4a,s | NIO | 8.7s | (0)s\n4s | Lexus | 8.7s | (0)s\n4s | AITO | 8.7s | (0)s\n4s | Audi | 8.7s | (+0.2)s\n4s | BMW | 8.7s | (-0.1)s\n4 | Land Rover | 8.7 | (0)\n4s | Li Auto | 8.7s | (+0.1)s\n4s | Tesla | 8.7s | (+0.1)s\n15b,s | IM | 8.6s | —1,s\n15s | Volkswagen | 8.6s | (0)s\n15s | Xiaomi | 8.6s | —1,s\n15s | XPENG | 8.6s | (+0.1)s\n15s | Zeekr | 8.6s | —1,s\n28c | FAW-VW JETTA | 8.5 | (+0.1)\n28s | Honda | 8.5s | (+0.1)s\n38d,s | BYD | 8.4s | (+0.1)s\n38s | Toyota | 8.4s | (-0.1)s\nRank change vs 2023: increase / decrease ≥ 1\n● 2024  ○ 2023  ▬ 5 periods range\nClearly higher (>= 0.2) / Clearly lower (<= -0.2)\nSorted by values desc  a Maserati, Jeep, Lincoln also on rank 4  b Buick, Cadillac, Denza, +5 more also on rank 15  c Deepal, Ford, Leapmotor, +6 more also on rank 28  d Chevrolet, Citroën, +8 more also on rank 38\n1 Low base & Street recruited  5 Street recruited  6 At least one brand street recruited\nGroup Market Research and Customer Insight\nSource: NCBS China (Brands Overall) 2024\nC-VC | NCBS China 2024FY Volkswagen Group Report | CSD-class 8.3-15 years\nCONFIDENTIAL VERTRAULICH\nINTERNAL\n38",
+          "chart_type": "dot_with_line",
+          "row_count": 20,
+          "sample_values": [
+            "8.8",
+            "8.7",
+            "8.6",
+            "8.5",
+            "8.4",
+            "8.5",
+            "8.6",
+            "8.7",
+            "8.8"
+          ],
+          "confidence": "high"
+        },
+        "raw_response": "```json\n{\n  \"text_content\": \"Total Market | Dealer Satisfaction KPI\\nVOLKSWAGEN GROUP CHINA\\nSatisfaction with Dealer – Brand Overall\\nBrands Overall\\nRanking by brands 2024 | In 2024 | VS 2023\\n# | Ø subset | (values) | (values)\\n1s | Avatr | 8.8s | —1,s\\n1 | Mercedes | 8.8 | (0)\\n1 | Porsche | 8.8 | (0)\\n4a,s | NIO | 8.7s | (0)s\\n4s | Lexus | 8.7s | (0)s\\n4s | AITO | 8.7s | (0)s\\n4s | Audi | 8.7s | (+0.2)s\\n4s | BMW | 8.7s | (-0.1)s\\n4 | Land Rover | 8.7 | (0)\\n4s | Li Auto | 8.7s | (+0.1)s\\n4s | Tesla | 8.7s | (+0.1)s\\n15b,s | IM | 8.6s | —1,s\\n15s | Volkswagen | 8.6s | (0)s\\n15s | Xiaomi | 8.6s | —1,s\\n15s | XPENG | 8.6s | (+0.1)s\\n15s | Zeekr | 8.6s | —1,s\\n28c | FAW-VW JETTA | 8.5 | (+0.1)\\n28s | Honda | 8.5s | (+0.1)s\\n38d,s | BYD | 8.4s | (+0.1)s\\n38s | Toyota | 8.4s | (-0.1)s\\nRank change vs 2023: increase / decrease ≥ 1\\n● 2024  ○ 2023  ▬ 5 periods range\\nClearly higher (>= 0.2) / Clearly lower (<= -0.2)\\nSorted by values desc  a Maserati, Jeep, Lincoln also on rank 4  b Buick, Cadillac, Denza, +5 more also on rank 15  c Deepal, Ford, Leapmotor, +6 more also on rank 28  d Chevrolet, Citroën, +8 more also on rank 38\\n1 Low base & Street recruited  5 Street recruited  6 At least one brand street recruited\\nGroup Market Research and Customer Insight\\nSource: NCBS China (Brands Overall) 2024\\nC-VC | NCBS China 2024FY Volkswagen Group Report | CSD-class 8.3-15 years\\nCONFIDENTIAL VERTRAULICH\\nINTERNAL\\n38\",\n  \"chart_type\": \"dot_with_line\",\n  \"row_count\": 20,\n  \"sample_values\": [\"8.8\", \"8.7\", \"8.6\", \"8.5\", \"8.4\", \"8.5\", \"8.6\", \"8.7\", \"8.8\"],\n  \"confidence\": \"high\"\n}\n```"
+      },
+      "dpi_200": {
+        "dpi": 200,
+        "image_size_kb": 396.0,
+        "latency_seconds": 10.68,
+        "response_length": 1787,
+        "parsed_json": {
+          "text_content": "Total Market | Dealer Satisfaction KPI\nVOLKSWAGEN GROUP CHINA\nSatisfaction with Dealer – Brand Overall\nBrands Overall\n\nRanking by brands 2024 | In 2024 | VS 2023\n# | Ø subset | value | value\n- 8.5 6 (0) 6\n1 5 Avatar 8.8 5 — 1,5\n— 1 Mercedes 8.8 (0)\n— 1 Porsche 8.8 (0)\n▲ 4 a,5 NIO 8.7 5 (0) 5\n▲ 4 5 Lexus 8.7 5 (0) 5\n▲ 4 5 AITO 8.7 5 (0) 5\n▲ 4 5 Audi 8.7 5 (+0.2) 5\n▼ 4 5 BMW 8.7 5 (-0.1) 5\n▲ 4 Land Rover 8.7 (0)\n▲ 4 5 Li Auto 8.7 5 (+0.1) 5\n▲ 4 5 Tesla 8.7 5 (+0.1) 5\n15 b,5 IM 8.6 5 — 1,5\n▲ 15 5 Volkswagen 8.6 5 (0) 5\n15 5 Xiaomi 8.6 5 — 1,5\n▲ 15 5 XPENG 8.6 5 (+0.1) 5\n15 5 Zeekr 8.6 5 — 1,5\n▲ 28 c FAW-VW JETTA 8.5 (+0.1)\n▲ 28 5 Honda 8.5 5 (+0.1) 5\n▲ 38 d,5 BYD 8.4 5 (+0.1) 5\n▼ 38 5 Toyota 8.4 5 (-0.1) 5\n\nScale: 8.0, 8.2, 8.4, 8.6, 8.8, 9.0\nLegend: 2024, 2023, 5 periods range\nClearly higher (>= 0.2) / Clearly lower (<= -0.2)\nRank change vs 2023: increase / decrease ≥ 1\nTotal market | Volkswagen | Audi | Porsche | FAW-VW JETTA\nYears axis: 2020, 2021, 2022, 2023, 2024\n\nFooter: Sorted by values desc. a Maserati, Jeep, Lincoln also on rank 4. b Buick, Cadillac, Denza, +5 more also on rank 15. c Deepal, Ford, Leapmotor, +6 more also on rank 28. d Chevrolet, Citroën, +8 more also on rank 38.\n1Low base & Street recruited. 5Street recruited. 6At least one brand street recruited.\nSource: NCBS China (Brands Overall) 2024\nGroup Market Research and Customer Insight\nC-VC | NCBS China 2024FY Volkswagen Group Report | CSD-class 8.3-15 years\nCONFIDENTIAL VERTRAULICH\nPage 38",
+          "chart_type": "line",
+          "row_count": 18,
+          "sample_values": [
+            "8.5",
+            "8.8",
+            "8.8",
+            "8.8",
+            "8.7",
+            "8.7",
+            "8.7",
+            "8.7",
+            "8.7",
+            "8.7",
+            "8.7",
+            "8.7",
+            "8.6",
+            "8.6",
+            "8.6",
+            "8.6",
+            "8.5",
+            "8.5",
+            "8.4",
+            "8.4"
+          ],
+          "confidence": "high"
+        },
+        "raw_response": "```json\n{\n  \"text_content\": \"Total Market | Dealer Satisfaction KPI\\nVOLKSWAGEN GROUP CHINA\\nSatisfaction with Dealer – Brand Overall\\nBrands Overall\\n\\nRanking by brands 2024 | In 2024 | VS 2023\\n# | Ø subset | value | value\\n- 8.5 6 (0) 6\\n1 5 Avatar 8.8 5 — 1,5\\n— 1 Mercedes 8.8 (0)\\n— 1 Porsche 8.8 (0)\\n▲ 4 a,5 NIO 8.7 5 (0) 5\\n▲ 4 5 Lexus 8.7 5 (0) 5\\n▲ 4 5 AITO 8.7 5 (0) 5\\n▲ 4 5 Audi 8.7 5 (+0.2) 5\\n▼ 4 5 BMW 8.7 5 (-0.1) 5\\n▲ 4 Land Rover 8.7 (0)\\n▲ 4 5 Li Auto 8.7 5 (+0.1) 5\\n▲ 4 5 Tesla 8.7 5 (+0.1) 5\\n15 b,5 IM 8.6 5 — 1,5\\n▲ 15 5 Volkswagen 8.6 5 (0) 5\\n15 5 Xiaomi 8.6 5 — 1,5\\n▲ 15 5 XPENG 8.6 5 (+0.1) 5\\n15 5 Zeekr 8.6 5 — 1,5\\n▲ 28 c FAW-VW JETTA 8.5 (+0.1)\\n▲ 28 5 Honda 8.5 5 (+0.1) 5\\n▲ 38 d,5 BYD 8.4 5 (+0.1) 5\\n▼ 38 5 Toyota 8.4 5 (-0.1) 5\\n\\nScale: 8.0, 8.2, 8.4, 8.6, 8.8, 9.0\\nLegend: 2024, 2023, 5 periods range\\nClearly higher (>= 0.2) / Clearly lower (<= -0.2)\\nRank change vs 2023: increase / decrease ≥ 1\\nTotal market | Volkswagen | Audi | Porsche | FAW-VW JETTA\\nYears axis: 2020, 2021, 2022, 2023, 2024\\n\\nFooter: Sorted by values desc. a Maserati, Jeep, Lincoln also on rank 4. b Buick, Cadillac, Denza, +5 more also on rank 15. c Deepal, Ford, Leapmotor, +6 more also on rank 28. d Chevrolet, Citroën, +8 more also on rank 38.\\n1Low base & Street recruited. 5Street recruited. 6At least one brand street recruited.\\nSource: NCBS China (Brands Overall) 2024\\nGroup Market Research and Customer Insight\\nC-VC | NCBS China 2024FY Volkswagen Group Report | CSD-class 8.3-15 years\\nCONFIDENTIAL VERTRAULICH\\nPage 38\",\n  \"chart_type\": \"line\",\n  \"row_count\": 18,\n  \"sample_values\": [\"8.5\", \"8.8\", \"8.8\", \"8.8\", \"8.7\", \"8.7\", \"8.7\", \"8.7\", \"8.7\", \"8.7\", \"8.7\", \"8.7\", \"8.6\", \"8.6\", \"8.6\", \"8.6\", \"8.5\", \"8.5\", \"8.4\", \"8.4\"],\n  \"confidence\": \"high\"\n}\n```"
+      },
+      "dpi_300": {
+        "dpi": 300,
+        "image_size_kb": 666.5,
+        "latency_seconds": 11.96,
+        "response_length": 1963,
+        "parsed_json": {
+          "text_content": "Total Market | Dealer Satisfaction KPI\nVOLKSWAGEN GROUP CHINA\nBrands Overall\nSatisfaction with Dealer – Brand Overall\n\nRanking by brands 2024 | In 2024 | VS 2023\n# | Ø subset | | | \n- | - | 8.5⁶ | (0)⁶\n1ˢ | Avatar | 8.8⁵ | -ˢ,⁵\n— | 1 | Mercedes | 8.8 | (0)\n— | 1 | Porsche | 8.8 | (0)\n▲ | 4ᵃ,ˢ | NIO | 8.7⁵ | (0)⁵\n▲ | 4ˢ | Lexus | 8.7⁵ | (0)⁵\n▲ | 4ˢ | AITO | 8.7⁵ | (0)⁵\n▲ | 4ˢ | Audi | 8.7⁵ | (+0.2)⁵\n▼ | 4ˢ | BMW | 8.7⁵ | (-0.1)ˢ\n▲ | 4 | Land Rover | 8.7 | (0)\n▲ | 4ˢ | Li Auto | 8.7⁵ | (+0.1)⁵\n▲ | 4ˢ | Tesla | 8.7⁵ | (+0.1)⁵\n15ᵇ,ˢ | IM | 8.6⁵ | -ˢ,⁵\n▲ | 15ˢ | Volkswagen | 8.6⁵ | (0)⁵\n15ˢ | Xiaomi | 8.6⁵ | -ˢ,⁵\n▲ | 15ˢ | XPENG | 8.6⁵ | (+0.1)⁵\n15ˢ | Zeekr | 8.6⁵ | -ˢ,⁵\n▲ | 28ᶜ | FAW-VW JETTA | 8.5 | (+0.1)\n▲ | 28ˢ | Honda | 8.5⁵ | (+0.1)ˢ\n▲ | 38ᵈ,ˢ | BYD | 8.4⁵ | (+0.1)ˢ\n▼ | 38ˢ | Toyota | 8.4⁵ | (-0.1)ˢ\n\nLegend: ▲▼ Rank change vs 2023: increase / decrease ≥ 1   ● 2024   ○ 2023   — 5 periods range   Clearly higher (>= 0.2) / Clearly lower (<= -0.2)\n\nNotes: Sorted by values desc   ᵃ Maserati, Jeep, Lincoln also on rank 4   ᵇ Buick, Cadillac, Denza, +5 more also on rank 15   ᶜDeepal, Ford, Leapmotor, +6 more also on rank 28   ᵈ Chevrolet, Citroën, +8 more also on rank 38   ¹Low base & Street recruited   ˢStreet recruited   ⁶At least one brand street recruited\n\nINTERNAL   Group Market Research and Customer Insight\nSource: NCBS China (Brands Overall) 2024\nC-VC | NCBS China 2024FY Volkswagen Group Report | CSD-class 8.3-15 years\nCONFIDENTIAL VERTRAULICH\n38\n\nChart legend (right side):\n● Total market\n● Volkswagen\n● Audi\n● Porsche\n● FAW-VW JETTA",
+          "chart_type": "line",
+          "row_count": 21,
+          "sample_values": [
+            "8.5",
+            "8.8",
+            "8.8",
+            "8.8",
+            "8.7",
+            "8.7",
+            "8.7",
+            "8.7",
+            "8.7",
+            "8.7",
+            "8.7",
+            "8.7",
+            "8.6",
+            "8.6",
+            "8.6",
+            "8.6",
+            "8.6",
+            "8.5",
+            "8.5",
+            "8.4",
+            "8.4"
+          ],
+          "confidence": "high"
+        },
+        "raw_response": "```json\n{\n  \"text_content\": \"Total Market | Dealer Satisfaction KPI\\nVOLKSWAGEN GROUP CHINA\\nBrands Overall\\nSatisfaction with Dealer – Brand Overall\\n\\nRanking by brands 2024 | In 2024 | VS 2023\\n# | Ø subset | | | \\n- | - | 8.5⁶ | (0)⁶\\n1ˢ | Avatar | 8.8⁵ | -ˢ,⁵\\n— | 1 | Mercedes | 8.8 | (0)\\n— | 1 | Porsche | 8.8 | (0)\\n▲ | 4ᵃ,ˢ | NIO | 8.7⁵ | (0)⁵\\n▲ | 4ˢ | Lexus | 8.7⁵ | (0)⁵\\n▲ | 4ˢ | AITO | 8.7⁵ | (0)⁵\\n▲ | 4ˢ | Audi | 8.7⁵ | (+0.2)⁵\\n▼ | 4ˢ | BMW | 8.7⁵ | (-0.1)ˢ\\n▲ | 4 | Land Rover | 8.7 | (0)\\n▲ | 4ˢ | Li Auto | 8.7⁵ | (+0.1)⁵\\n▲ | 4ˢ | Tesla | 8.7⁵ | (+0.1)⁵\\n15ᵇ,ˢ | IM | 8.6⁵ | -ˢ,⁵\\n▲ | 15ˢ | Volkswagen | 8.6⁵ | (0)⁵\\n15ˢ | Xiaomi | 8.6⁵ | -ˢ,⁵\\n▲ | 15ˢ | XPENG | 8.6⁵ | (+0.1)⁵\\n15ˢ | Zeekr | 8.6⁵ | -ˢ,⁵\\n▲ | 28ᶜ | FAW-VW JETTA | 8.5 | (+0.1)\\n▲ | 28ˢ | Honda | 8.5⁵ | (+0.1)ˢ\\n▲ | 38ᵈ,ˢ | BYD | 8.4⁵ | (+0.1)ˢ\\n▼ | 38ˢ | Toyota | 8.4⁵ | (-0.1)ˢ\\n\\nLegend: ▲▼ Rank change vs 2023: increase / decrease ≥ 1   ● 2024   ○ 2023   — 5 periods range   Clearly higher (>= 0.2) / Clearly lower (<= -0.2)\\n\\nNotes: Sorted by values desc   ᵃ Maserati, Jeep, Lincoln also on rank 4   ᵇ Buick, Cadillac, Denza, +5 more also on rank 15   ᶜDeepal, Ford, Leapmotor, +6 more also on rank 28   ᵈ Chevrolet, Citroën, +8 more also on rank 38   ¹Low base & Street recruited   ˢStreet recruited   ⁶At least one brand street recruited\\n\\nINTERNAL   Group Market Research and Customer Insight\\nSource: NCBS China (Brands Overall) 2024\\nC-VC | NCBS China 2024FY Volkswagen Group Report | CSD-class 8.3-15 years\\nCONFIDENTIAL VERTRAULICH\\n38\\n\\nChart legend (right side):\\n● Total market\\n● Volkswagen\\n● Audi\\n● Porsche\\n● FAW-VW JETTA\",\n  \"chart_type\": \"line\",\n  \"row_count\": 21,\n  \"sample_values\": [\n    \"8.5\",\n    \"8.8\",\n    \"8.8\",\n    \"8.8\",\n    \"8.7\",\n    \"8.7\",\n    \"8.7\",\n    \"8.7\",\n    \"8.7\",\n    \"8.7\",\n    \"8.7\",\n    \"8.7\",\n    \"8.6\",\n    \"8.6\",\n    \"8.6\",\n    \"8.6\",\n    \"8.6\",\n    \"8.5\",\n    \"8.5\",\n    \"8.4\",\n    \"8.4\"\n  ],\n  \"confidence\": \"high\"\n}\n```"
+      },
+      "dpi_400": {
+        "dpi": 400,
+        "image_size_kb": 899.3,
+        "latency_seconds": 18.17,
+        "response_length": 1985,
+        "parsed_json": {
+          "text_content": "Total Market | Dealer Satisfaction KPI\nVOLKSWAGEN GROUP CHINA\nSatisfaction with Dealer – Brand Overall\nBrands Overall\n\nRanking by brands 2024 | In 2024 | VS 2023\n# | Ø subset | | |\n(subscript values indicating ranking changes)\n1 - Avatr | 8.8 | -4,5\n- 1 | Mercedes | 8.8 | (0)\n- 1 | Porsche | 8.8 | (0)\n4 ▲4,5 | NIO | 8.7 | (0)5\n4 ▲4 | Lexus | 8.7 | (0)5\n4 ▲4 | AITO | 8.7 | (0)5\n4 ▲4 | Audi | 8.7 | (+0.2)5\n4 ▼4 | BMW | 8.7 | (-0.1)5\n▲4 | Land Rover | 8.7 | (0)\n4 ▲4,5 | Li Auto | 8.7 | (+0.1)5\n4 ▲4,5 | Tesla | 8.7 | (+0.1)5\n15 b,5 | IM | 8.6 | -1,5\n▲15,5 | Volkswagen | 8.6 | (0)5\n15,5 | Xiaomi | 8.6 | -1,5\n▲15,5 | XPENG | 8.6 | (+0.1)5\n15,5 | Zeekr | 8.6 | -1,5\n▲28 c | FAW-VW JETTA | 8.5 | (+0.1)\n▲28,5 | Honda | 8.5 | (+0.1)5\n▲38 d,5 | BYD | 8.4 | (+0.1)5\n▼38,5 | Toyota | 8.4 | (-0.1)5\n\nRank change vs 2023: increase / decrease ≥ 1\n● 2024 ○ 2023 — 5 periods range\nClearly higher (>= 0.2) / Clearly lower (<= -0.2)\nSorted by values desc\nSorted by values desc  a Maserati, Jeep, Lincoln also on rank 4  b Buick, Cadillac, Denza, +5 more also on rank 15  c Deepal, Ford, Leapmotor, +6 more also on rank 28  d Chevrolet, Citroën, +8 more also on rank 38\n1 Low base & Street recruited 5 Street recruited 6 At least one brand street recruited\nGroup Market Research | Customer Insight\nSource: NCBS China (Brands Overall) 2024\nC-VC | NCBS China 2024FY Volkswagen Group Report | CSD-class 8.3-15 years\nCONFIDENTIAL VERTRAULICH\nINTERNAL 38\n\nChart legend: Total market, Volkswagen, Audi, Porsche, FAW-VW JETTA\nChart x-axis: 2020, 2021, 2022, 2023, 2024\nChart y-axis: 8.3 to 9.0",
+          "chart_type": "dot_plot_with_line_chart",
+          "row_count": 20,
+          "sample_values": [
+            "8.8",
+            "8.8",
+            "8.8",
+            "8.7",
+            "8.7",
+            "8.7",
+            "8.7",
+            "8.7",
+            "8.7",
+            "8.7",
+            "8.7",
+            "8.6",
+            "8.6",
+            "8.6",
+            "8.6",
+            "8.6",
+            "8.5",
+            "8.5",
+            "8.4",
+            "8.4"
+          ],
+          "confidence": "high"
+        },
+        "raw_response": "```json\n{\n  \"text_content\": \"Total Market | Dealer Satisfaction KPI\\nVOLKSWAGEN GROUP CHINA\\nSatisfaction with Dealer – Brand Overall\\nBrands Overall\\n\\nRanking by brands 2024 | In 2024 | VS 2023\\n# | Ø subset | | |\\n(subscript values indicating ranking changes)\\n1 - Avatr | 8.8 | -4,5\\n- 1 | Mercedes | 8.8 | (0)\\n- 1 | Porsche | 8.8 | (0)\\n4 ▲4,5 | NIO | 8.7 | (0)5\\n4 ▲4 | Lexus | 8.7 | (0)5\\n4 ▲4 | AITO | 8.7 | (0)5\\n4 ▲4 | Audi | 8.7 | (+0.2)5\\n4 ▼4 | BMW | 8.7 | (-0.1)5\\n▲4 | Land Rover | 8.7 | (0)\\n4 ▲4,5 | Li Auto | 8.7 | (+0.1)5\\n4 ▲4,5 | Tesla | 8.7 | (+0.1)5\\n15 b,5 | IM | 8.6 | -1,5\\n▲15,5 | Volkswagen | 8.6 | (0)5\\n15,5 | Xiaomi | 8.6 | -1,5\\n▲15,5 | XPENG | 8.6 | (+0.1)5\\n15,5 | Zeekr | 8.6 | -1,5\\n▲28 c | FAW-VW JETTA | 8.5 | (+0.1)\\n▲28,5 | Honda | 8.5 | (+0.1)5\\n▲38 d,5 | BYD | 8.4 | (+0.1)5\\n▼38,5 | Toyota | 8.4 | (-0.1)5\\n\\nRank change vs 2023: increase / decrease ≥ 1\\n● 2024 ○ 2023 — 5 periods range\\nClearly higher (>= 0.2) / Clearly lower (<= -0.2)\\nSorted by values desc\\nSorted by values desc  a Maserati, Jeep, Lincoln also on rank 4  b Buick, Cadillac, Denza, +5 more also on rank 15  c Deepal, Ford, Leapmotor, +6 more also on rank 28  d Chevrolet, Citroën, +8 more also on rank 38\\n1 Low base & Street recruited 5 Street recruited 6 At least one brand street recruited\\nGroup Market Research | Customer Insight\\nSource: NCBS China (Brands Overall) 2024\\nC-VC | NCBS China 2024FY Volkswagen Group Report | CSD-class 8.3-15 years\\nCONFIDENTIAL VERTRAULICH\\nINTERNAL 38\\n\\nChart legend: Total market, Volkswagen, Audi, Porsche, FAW-VW JETTA\\nChart x-axis: 2020, 2021, 2022, 2023, 2024\\nChart y-axis: 8.3 to 9.0\",\n  \"chart_type\": \"dot_plot_with_line_chart\",\n  \"row_count\": 20,\n  \"sample_values\": [\n    \"8.8\",\n    \"8.8\",\n    \"8.8\",\n    \"8.7\",\n    \"8.7\",\n    \"8.7\",\n    \"8.7\",\n    \"8.7\",\n    \"8.7\",\n    \"8.7\",\n    \"8.7\",\n    \"8.6\",\n    \"8.6\",\n    \"8.6\",\n    \"8.6\",\n    \"8.6\",\n    \"8.5\",\n    \"8.5\",\n    \"8.4\",\n    \"8.4\"\n  ],\n  \"confidence\": \"high\"\n}\n```"
+      }
+    }
+  },
+  "page58": {
+    "page_width": 960.0,
+    "page_height": 540.0,
+    "results": {
+      "dpi_150": {
+        "dpi": 150,
+        "image_size_kb": 330.6,
+        "latency_seconds": 9.16,
+        "response_length": 2047,
+        "parsed_json": {
+          "text_content": "Total Market | Loyalty KPI\nVOLKSWAGEN GROUP CHINA\nGains and Losses – VW Brand Overall\nBrands Overall\nHyundai Beijing Elantra 8500\nHyundai Beijing Verna/Accent 3300\nHyundai Beijing Mistra 2000\n...\nHyundai +17 200\nChevrolet SGM Cruze 3800\nChevrolet SGM Sail 3500\nChevrolet SGM Monza 2100\n...\nChevrolet +13 400\nOther brands +11 300\nAudi FAW-VW A6L -10500\nAudi FAW-VW Q5/Q5L/Q5L Sportback -8200\nAudi FAW-VW A4L -3300\n...\nAudi -30 700\nGeely Emgrand EC-8/EC-7/8L 4000\nGeely Vision 3800\nGeely Bin Rui 1300\n...\nGeely +12 100\nPositive balance ← Gains\nNegative balance → Losses\n5000 units\nVolkswagen Total\nGains: 307,1 | 326,8 | 222,7 | 209,0 | 283,1\nBalance: -6,0 | -79,1 | -123,7 | -145,4 | -105,8\nLosses: 313,1 | 405,9 | 346,4 | 354,4 | 388,9\nK Units | 2020 | 2021 | 2022 | 2023 | 2024\nBYD Song Plus -6600\nBYD Qin Plus -5200\nBYD Han -4500\n...\nBYD -28 500\nInner values: 3900 | 21100 | 900 | 14300 | 3300 | 194300 | 183000 | 34000 | 7600 | 36100 | 1300 | 22400 | 16300 | 35100 | 0 | 18600 | 800 | 17700 | 0 | 13400 | 500 | 12300 | 23500 | 11400\nFaw - Red Flag -11 800\nLi Auto -13 400\nBMW Brilliance 3 Series -6300\nBMW Brilliance X3 -3800\nBMW Brilliance 5 Series -3000\n...\nBMW -21 100\nMercedes -16 900\nToyota -18 800\nTesla -18 600\nValues representing volume totals over the bars do not include respondents who did not answer respective questions and - as a result - may differ between bars and vs circle chart\nSource: NCBS China (Brands Overall) 2024\nGroup Market Research and Customer Insight\nC-VC | NCBS China 2024FY Volkswagen Group Report | CSD-class 8.3-15 years\nCONFIDENTIAL VERTRAULICH\nINTERNAL\n58",
+          "chart_type": "bar_vertical",
+          "row_count": 13,
+          "sample_values": [
+            "Audi -30 700",
+            "BYD -28 500",
+            "BMW -21 100",
+            "Toyota -18 800",
+            "Tesla -18 600",
+            "Mercedes -16 900",
+            "Li Auto -13 400",
+            "Faw-Red Flag -11 800",
+            "Other brands +11 300",
+            "Geely +12 100",
+            "Chevrolet +13 400",
+            "Hyundai +17 200",
+            "Volkswagen Total Balance 2024: -105,8"
+          ],
+          "confidence": "high"
+        },
+        "raw_response": "```json\n{\n  \"text_content\": \"Total Market | Loyalty KPI\\nVOLKSWAGEN GROUP CHINA\\nGains and Losses – VW Brand Overall\\nBrands Overall\\nHyundai Beijing Elantra 8500\\nHyundai Beijing Verna/Accent 3300\\nHyundai Beijing Mistra 2000\\n...\\nHyundai +17 200\\nChevrolet SGM Cruze 3800\\nChevrolet SGM Sail 3500\\nChevrolet SGM Monza 2100\\n...\\nChevrolet +13 400\\nOther brands +11 300\\nAudi FAW-VW A6L -10500\\nAudi FAW-VW Q5/Q5L/Q5L Sportback -8200\\nAudi FAW-VW A4L -3300\\n...\\nAudi -30 700\\nGeely Emgrand EC-8/EC-7/8L 4000\\nGeely Vision 3800\\nGeely Bin Rui 1300\\n...\\nGeely +12 100\\nPositive balance ← Gains\\nNegative balance → Losses\\n5000 units\\nVolkswagen Total\\nGains: 307,1 | 326,8 | 222,7 | 209,0 | 283,1\\nBalance: -6,0 | -79,1 | -123,7 | -145,4 | -105,8\\nLosses: 313,1 | 405,9 | 346,4 | 354,4 | 388,9\\nK Units | 2020 | 2021 | 2022 | 2023 | 2024\\nBYD Song Plus -6600\\nBYD Qin Plus -5200\\nBYD Han -4500\\n...\\nBYD -28 500\\nInner values: 3900 | 21100 | 900 | 14300 | 3300 | 194300 | 183000 | 34000 | 7600 | 36100 | 1300 | 22400 | 16300 | 35100 | 0 | 18600 | 800 | 17700 | 0 | 13400 | 500 | 12300 | 23500 | 11400\\nFaw - Red Flag -11 800\\nLi Auto -13 400\\nBMW Brilliance 3 Series -6300\\nBMW Brilliance X3 -3800\\nBMW Brilliance 5 Series -3000\\n...\\nBMW -21 100\\nMercedes -16 900\\nToyota -18 800\\nTesla -18 600\\nValues representing volume totals over the bars do not include respondents who did not answer respective questions and - as a result - may differ between bars and vs circle chart\\nSource: NCBS China (Brands Overall) 2024\\nGroup Market Research and Customer Insight\\nC-VC | NCBS China 2024FY Volkswagen Group Report | CSD-class 8.3-15 years\\nCONFIDENTIAL VERTRAULICH\\nINTERNAL\\n58\",\n  \"chart_type\": \"bar_vertical\",\n  \"row_count\": 13,\n  \"sample_values\": [\"Audi -30 700\", \"BYD -28 500\", \"BMW -21 100\", \"Toyota -18 800\", \"Tesla -18 600\", \"Mercedes -16 900\", \"Li Auto -13 400\", \"Faw-Red Flag -11 800\", \"Other brands +11 300\", \"Geely +12 100\", \"Chevrolet +13 400\", \"Hyundai +17 200\", \"Volkswagen Total Balan"
+      },
+      "dpi_200": {
+        "dpi": 200,
+        "image_size_kb": 472.8,
+        "latency_seconds": 9.4,
+        "response_length": 2064,
+        "parsed_json": {
+          "text_content": "Total Market | Loyalty KPI | VOLKSWAGEN GROUP CHINA | Gains and Losses - VW Brand Overall | Brands Overall | Hyundai: Hyundai Beijing Elantra 8500, Hyundai Beijing Verna/Accent 3300, Hyundai Beijing Mistra 2000 | Chevrolet: Chevrolet SGM Cruze 3800, Chevrolet SGM Sail 3500, Chevrolet SGM Monza 2100 | Other brands: +17 200 | Hyundai: +11 300 | Geely: Geely Emgrand EC-8/EC-7/EC-7 4000, Geely Vision 3800, Geely Bin Rui 1300 | Chevrolet: +13 400 | Positive balance ← Gains | Audi: Audi FAW-VW A6L -10500, Audi FAW-VW Q5/Q5L/Q5L Sportback -8200, Audi FAW-VW A4L -3300 | Audi: -30 700 | Geely: +12 100 | Negative balance → Losses | 5000 units | BYD: BYD Song Plus -6600, BYD Qin Plus -5200, BYD Han -4500 | BYD: -28 500 | Volkswagen Total | 194 300, 183 000, 3 900, 21 100, 900, 14 300, 11 400, 23 500, 3 300, 34 000, 7 600, 36 100, 1 300, 22 400, 16 300, 35 100, 0, 18 600, 800, 17 700, 12 300, 500, 13 400, 0 | Faw - Red Flag: -11 800 | BMW: BMW Brilliance 3 Series -6300, BMW Brilliance X3 -3800, BMW Brilliance 5 Series -3000 | BMW: -21 100 | Li Auto: -13 400 | Gains: 307,1 326,8 222,7 209,0 283,1 | Balance: -6,0 -79,1 -123,7 -145,4 -105,8 | Losses: 313,1 405,9 346,4 354,4 388,9 | Toyota: -18 800 | Tesla: -18 600 | Mercedes: -16 900 | K Units | 2020 2021 2022 2023 2024 | Values representing volume totals over the bars do not include respondents who did not answer respective questions and - as a result - may differ between bars and vs circle chart | Source: NCBS China (Brands Overall) 2024 | Group Market Research and Customer Insight | INTERNAL | C-VC | NCBS China 2024FY Volkswagen Group Report | CSD-class 8.3-15 years | CONFIDENTIAL VERTRAULICH | 58",
+          "chart_type": "bar_vertical",
+          "row_count": 12,
+          "sample_values": [
+            "307,1",
+            "326,8",
+            "222,7",
+            "209,0",
+            "283,1",
+            "-6,0",
+            "-79,1",
+            "-123,7",
+            "-145,4",
+            "-105,8",
+            "313,1",
+            "405,9",
+            "346,4",
+            "354,4",
+            "388,9",
+            "+17 200",
+            "+11 300",
+            "+13 400",
+            "+12 100",
+            "-30 700",
+            "-28 500",
+            "-21 100",
+            "-11 800",
+            "-13 400",
+            "-18 800",
+            "-18 600",
+            "-16 900"
+          ],
+          "confidence": "high"
+        },
+        "raw_response": "```json\n{\n  \"text_content\": \"Total Market | Loyalty KPI | VOLKSWAGEN GROUP CHINA | Gains and Losses - VW Brand Overall | Brands Overall | Hyundai: Hyundai Beijing Elantra 8500, Hyundai Beijing Verna/Accent 3300, Hyundai Beijing Mistra 2000 | Chevrolet: Chevrolet SGM Cruze 3800, Chevrolet SGM Sail 3500, Chevrolet SGM Monza 2100 | Other brands: +17 200 | Hyundai: +11 300 | Geely: Geely Emgrand EC-8/EC-7/EC-7 4000, Geely Vision 3800, Geely Bin Rui 1300 | Chevrolet: +13 400 | Positive balance ← Gains | Audi: Audi FAW-VW A6L -10500, Audi FAW-VW Q5/Q5L/Q5L Sportback -8200, Audi FAW-VW A4L -3300 | Audi: -30 700 | Geely: +12 100 | Negative balance → Losses | 5000 units | BYD: BYD Song Plus -6600, BYD Qin Plus -5200, BYD Han -4500 | BYD: -28 500 | Volkswagen Total | 194 300, 183 000, 3 900, 21 100, 900, 14 300, 11 400, 23 500, 3 300, 34 000, 7 600, 36 100, 1 300, 22 400, 16 300, 35 100, 0, 18 600, 800, 17 700, 12 300, 500, 13 400, 0 | Faw - Red Flag: -11 800 | BMW: BMW Brilliance 3 Series -6300, BMW Brilliance X3 -3800, BMW Brilliance 5 Series -3000 | BMW: -21 100 | Li Auto: -13 400 | Gains: 307,1 326,8 222,7 209,0 283,1 | Balance: -6,0 -79,1 -123,7 -145,4 -105,8 | Losses: 313,1 405,9 346,4 354,4 388,9 | Toyota: -18 800 | Tesla: -18 600 | Mercedes: -16 900 | K Units | 2020 2021 2022 2023 2024 | Values representing volume totals over the bars do not include respondents who did not answer respective questions and - as a result - may differ between bars and vs circle chart | Source: NCBS China (Brands Overall) 2024 | Group Market Research and Customer Insight | INTERNAL | C-VC | NCBS China 2024FY Volkswagen Group Report | CSD-class 8.3-15 years | CONFIDENTIAL VERTRAULICH | 58\",\n  \"chart_type\": \"bar_vertical\",\n  \"row_count\": 12,\n  \"sample_values\": [\"307,1\", \"326,8\", \"222,7\", \"209,0\", \"283,1\", \"-6,0\", \"-79,1\", \"-123,7\", \"-145,4\", \"-105,8\", \"313,1\", \"405,9\", \"346,4\", \"354,4\", \"388,9\", \"+17 200\", \"+11 300\", \"+13 400\", \"+12 100\", \"-30 700\", \"-28 500\", \"-21 100\", \"-11 800\", \"-13 400\""
+      },
+      "dpi_300": {
+        "dpi": 300,
+        "image_size_kb": 800.0,
+        "latency_seconds": 11.49,
+        "response_length": 1823,
+        "parsed_json": {
+          "text_content": "Total Market | Loyalty KPI | VOLKSWAGEN GROUP CHINA | Brands Overall | Gains and Losses – VW Brand Overall | Hyundai: Hyundai Beijing Elantra 8500, Hyundai Beijing Verna/Accent 3300, Hyundai Beijing Mistra 2000, ... +17 200 | Other brands +11 300 | Chevrolet: Chevrolet SGM Cruze 3800, Chevrolet SGM Sail 3500, Chevrolet SGM Monza 2100, ... +13 400 | Geely: Geely Emgrand EC-8/EC-7/BO 4000, Geely Vision 3800, Geely Bin Rui 1300, ... +12 100 | Audi: Audi FAW-VW A6L -10500, Audi FAW-VW Q5/Q5L/Q5L Sportback -8200, Audi FAW-VW A4L -3300, ... -30 700 | BYD: BYD Song Plus -6600, BYD Qin Plus -5200, BYD Han -4500, ... -28 500 | BMW: BMW Brilliance 3 Series -6300, BMW Brilliance X3 -3800, BMW Brilliance 5 Series -3000, ... -21 100 | Toyota -18 800 | Tesla -18 600 | Mercedes -16 900 | Li Auto -13 400 | Faw - Red Flag -11 800 | Center values: 3900, 21100, 900, 14300, 11400, 23500, 12300, 500, 13400, 0, 17700, 800, 18600, 35100, 16300, 1300, 22400, 3600, 7600, 34000, 3300, 183000, 194300 | Legend: Positive balance (Gains), Negative balance (Losses), 5000 units | Volkswagen Total: Gains 307,1 326,8 222,7 209,0 283,1 | Balance -6,0 -79,1 -123,7 -145,4 -105,8 | Losses 313,1 405,9 346,4 354,4 388,9 | K Units 2020 2021 2022 2023 2024 | Values representing volume totals over the bars do not include respondents who did not answer respective questions and - as a result - may differ between bars and vs circle chart | Source: NCBS China (Brands Overall) 2024 | Group Market Research and Customer Insight | C-VC | NCBS China 2024FY Volkswagen Group Report | CSD-class 8.3-15 years | CONFIDENTIAL VERTRAULICH | INTERNAL | 58",
+          "chart_type": "bar_vertical",
+          "row_count": 12,
+          "sample_values": [
+            "+17200",
+            "-30700",
+            "-21100",
+            "+12100",
+            "-18800",
+            "326.8",
+            "-145.4"
+          ],
+          "confidence": "high"
+        },
+        "raw_response": "```json\n{\n  \"text_content\": \"Total Market | Loyalty KPI | VOLKSWAGEN GROUP CHINA | Brands Overall | Gains and Losses – VW Brand Overall | Hyundai: Hyundai Beijing Elantra 8500, Hyundai Beijing Verna/Accent 3300, Hyundai Beijing Mistra 2000, ... +17 200 | Other brands +11 300 | Chevrolet: Chevrolet SGM Cruze 3800, Chevrolet SGM Sail 3500, Chevrolet SGM Monza 2100, ... +13 400 | Geely: Geely Emgrand EC-8/EC-7/BO 4000, Geely Vision 3800, Geely Bin Rui 1300, ... +12 100 | Audi: Audi FAW-VW A6L -10500, Audi FAW-VW Q5/Q5L/Q5L Sportback -8200, Audi FAW-VW A4L -3300, ... -30 700 | BYD: BYD Song Plus -6600, BYD Qin Plus -5200, BYD Han -4500, ... -28 500 | BMW: BMW Brilliance 3 Series -6300, BMW Brilliance X3 -3800, BMW Brilliance 5 Series -3000, ... -21 100 | Toyota -18 800 | Tesla -18 600 | Mercedes -16 900 | Li Auto -13 400 | Faw - Red Flag -11 800 | Center values: 3900, 21100, 900, 14300, 11400, 23500, 12300, 500, 13400, 0, 17700, 800, 18600, 35100, 16300, 1300, 22400, 3600, 7600, 34000, 3300, 183000, 194300 | Legend: Positive balance (Gains), Negative balance (Losses), 5000 units | Volkswagen Total: Gains 307,1 326,8 222,7 209,0 283,1 | Balance -6,0 -79,1 -123,7 -145,4 -105,8 | Losses 313,1 405,9 346,4 354,4 388,9 | K Units 2020 2021 2022 2023 2024 | Values representing volume totals over the bars do not include respondents who did not answer respective questions and - as a result - may differ between bars and vs circle chart | Source: NCBS China (Brands Overall) 2024 | Group Market Research and Customer Insight | C-VC | NCBS China 2024FY Volkswagen Group Report | CSD-class 8.3-15 years | CONFIDENTIAL VERTRAULICH | INTERNAL | 58\",\n  \"chart_type\": \"bar_vertical\",\n  \"row_count\": 12,\n  \"sample_values\": [\"+17200\", \"-30700\", \"-21100\", \"+12100\", \"-18800\", \"326.8\", \"-145.4\"],\n  \"confidence\": \"high\"\n}\n```"
+      },
+      "dpi_400": {
+        "dpi": 400,
+        "image_size_kb": 1033.0,
+        "latency_seconds": 8.79,
+        "response_length": 1724,
+        "parsed_json": {
+          "text_content": "Total Market | Loyalty KPI | VOLKSWAGEN GROUP CHINA | Brands Overall | Gains and Losses – VW Brand Overall | Hyundai Beijing Elantra 8500 | Hyundai Beijing Verna/Accent 3300 | Hyundai Beijing Mistra 2000 | Hyundai +17 200 | Chevrolet SGM Cruze 3800 | Chevrolet SGM Sail 3500 | Chevrolet SGM Monza 2100 | Chevrolet +13 400 | Geely Emgrand EC-8/EC-7/8L 10400 | Geely Vision 3800 | Geely Bin Rui 1300 | Geely +12 100 | Other brands +11 300 | Audi FAW-VW A6L -10500 | Audi FAW-VW Q5/Q5L/Q5L Sportback -8200 | Audi FAW-VW A4L -3300 | Audi -30 700 | BYD Song Plus -6600 | BYD Qin Plus -5200 | BYD Han -4500 | BYD -28 500 | BMW Brilliance 3 Series -6300 | BMW Brilliance X3 -3800 | BMW Brilliance 5 Series -3000 | BMW -21 100 | Faw - Red Flag -11 800 | Li Auto -13 400 | Toyota -18 800 | Tesla -18 600 | Mercedes -16 900 | Legend: Positive balance (Gains), Negative balance (Losses), 5000 units | Volkswagen Total: Gains 307,1 / 326,8 / 222,7 / 209,0 / 283,1 | Balance -6,0 / -79,1 / -123,7 / -145,4 / -105,8 | Losses 313,1 / 405,9 / 346,4 / 354,4 / 388,9 | K Units 2020 2021 2022 2023 2024 | Values representing volume totals over the bars do not include respondents who did not answer respective questions and - as a result - may differ between bars and vs circle chart | Source: NCBS China (Brands Overall) 2024 | C-VC | NCBS China 2024FY Volkswagen Group Report | CSD-class 8.3-15 years | INTERNAL | Group Market Research and Customer Insight | CONFIDENTIAL VERTRAULICH | 58",
+          "chart_type": "bar_vertical",
+          "row_count": 12,
+          "sample_values": [
+            "+17200",
+            "-30700",
+            "-28500",
+            "+17200",
+            "+12100",
+            "-11800",
+            "-13400",
+            "-18800",
+            "-18600",
+            "-16900",
+            "-21100",
+            "-105800"
+          ],
+          "confidence": "high"
+        },
+        "raw_response": "```json\n{\n  \"text_content\": \"Total Market | Loyalty KPI | VOLKSWAGEN GROUP CHINA | Brands Overall | Gains and Losses – VW Brand Overall | Hyundai Beijing Elantra 8500 | Hyundai Beijing Verna/Accent 3300 | Hyundai Beijing Mistra 2000 | Hyundai +17 200 | Chevrolet SGM Cruze 3800 | Chevrolet SGM Sail 3500 | Chevrolet SGM Monza 2100 | Chevrolet +13 400 | Geely Emgrand EC-8/EC-7/8L 10400 | Geely Vision 3800 | Geely Bin Rui 1300 | Geely +12 100 | Other brands +11 300 | Audi FAW-VW A6L -10500 | Audi FAW-VW Q5/Q5L/Q5L Sportback -8200 | Audi FAW-VW A4L -3300 | Audi -30 700 | BYD Song Plus -6600 | BYD Qin Plus -5200 | BYD Han -4500 | BYD -28 500 | BMW Brilliance 3 Series -6300 | BMW Brilliance X3 -3800 | BMW Brilliance 5 Series -3000 | BMW -21 100 | Faw - Red Flag -11 800 | Li Auto -13 400 | Toyota -18 800 | Tesla -18 600 | Mercedes -16 900 | Legend: Positive balance (Gains), Negative balance (Losses), 5000 units | Volkswagen Total: Gains 307,1 / 326,8 / 222,7 / 209,0 / 283,1 | Balance -6,0 / -79,1 / -123,7 / -145,4 / -105,8 | Losses 313,1 / 405,9 / 346,4 / 354,4 / 388,9 | K Units 2020 2021 2022 2023 2024 | Values representing volume totals over the bars do not include respondents who did not answer respective questions and - as a result - may differ between bars and vs circle chart | Source: NCBS China (Brands Overall) 2024 | C-VC | NCBS China 2024FY Volkswagen Group Report | CSD-class 8.3-15 years | INTERNAL | Group Market Research and Customer Insight | CONFIDENTIAL VERTRAULICH | 58\",\n  \"chart_type\": \"bar_vertical\",\n  \"row_count\": 12,\n  \"sample_values\": [\"+17200\", \"-30700\", \"-28500\", \"+17200\", \"+12100\", \"-11800\", \"-13400\", \"-18800\", \"-18600\", \"-16900\", \"-21100\", \"-105800\"],\n  \"confidence\": \"high\"\n}\n```"
+      }
+    }
+  }
+}

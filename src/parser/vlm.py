@@ -45,9 +45,9 @@ OCR_PROMPT = (
     "尽量保持原始段落与结构，用中文输出。"
 )
 
-_client = httpx.Client(timeout=60.0)
+_client = httpx.Client(timeout=120.0)
 
-# response cache: key = hash(image_bytes + prompt) -> text
+# response cache: disabled by default (VLM responses vary, cache causes stale results)
 _vlm_cache: dict[str, str] = {}
 
 
@@ -63,9 +63,10 @@ def _call_vlm(
     kind: str = "image",
 ) -> str:
     cfg = vlm_models.get_model(model_name)
-    key = _cache_key(image_bytes, prompt)
-    if env.VLM_RESPONSE_CACHE == "on" and key in _vlm_cache:
-        return _vlm_cache[key]
+    if False:  # cache disabled
+        key = _cache_key(image_bytes, prompt)
+        if env.VLM_RESPONSE_CACHE == "on" and key in _vlm_cache:
+            return _vlm_cache[key]
 
     b64 = base64.b64encode(image_bytes).decode("ascii")
     payload = {
@@ -79,7 +80,11 @@ def _call_vlm(
                 ],
             }
         ],
+        "max_tokens": 4000,
+        "temperature": 0.0,
     }
+    if cfg.thinking is not None:
+        payload["thinking"] = cfg.thinking
 
     url = cfg.base_url.rstrip("/") + "/chat/completions"
     headers = {"Authorization": f"Bearer {cfg.api_key}"}
@@ -112,8 +117,6 @@ def _call_vlm(
             total_tokens = int(usage.get("total_tokens", 0))
             cost = _calc_cost(cfg.model, prompt_tokens, completion_tokens)
             record_vlm_call(metrics_ctx, kind, cfg.model, latency, total_tokens, cost, attempt, True, prompt_tokens, completion_tokens)
-            if env.VLM_RESPONSE_CACHE == "on":
-                _vlm_cache[key] = content
             return content
         except (httpx.TimeoutException, httpx.HTTPError) as e:
             latency = int((time.time() - t0) * 1000)
@@ -162,5 +165,6 @@ def vlm_describe_chart(image_bytes: bytes, metrics_ctx, model_name: Optional[str
     return _call_vlm(image_bytes, prompt or CHART_PROMPT, metrics_ctx, model_name, kind="chart")
 
 
-def vlm_ocr(image_bytes: bytes, metrics_ctx, model_name: Optional[str] = None) -> str:
-    return _call_vlm(image_bytes, OCR_PROMPT, metrics_ctx, model_name, kind="scan")
+def vlm_ocr(image_bytes: bytes, metrics_ctx, model_name: Optional[str] = None,
+            prompt: Optional[str] = None) -> str:
+    return _call_vlm(image_bytes, prompt or OCR_PROMPT, metrics_ctx, model_name, kind="scan")

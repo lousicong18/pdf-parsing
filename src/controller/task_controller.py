@@ -30,6 +30,12 @@ def get_task(task_id: str) -> ParseResult:
     return result
 
 
+@router.delete("/tasks")
+def clear_tasks() -> dict:
+    count = task_store.clear_all()
+    return {"detail": "cleared", "count": count}
+
+
 @router.delete(
     "/tasks/{task_id}",
     responses={404: {"model": ErrorResponse}},
