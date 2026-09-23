@@ -25,7 +25,8 @@ uvx --from git+https://github.com/lousicong18/pdf-parsing pdf-parser-mcp
       "env": {
         "VLM_BASE_URL": "https://api.minimaxi.com/v1",
         "VLM_API_KEY": "${VLM_API_KEY}",
-        "VLM_MODEL": "MiniMax-M3"
+        "VLM_MODEL": "MiniMax-M3",
+        "UV_INDEX_URL": "https://pypi.tuna.tsinghua.edu.cn/simple"
       }
     }
   }
@@ -33,6 +34,8 @@ uvx --from git+https://github.com/lousicong18/pdf-parsing pdf-parser-mcp
 ```
 
 > `${VLM_API_KEY}` 从 shell 环境变量展开，避免明文密钥写入配置文件。
+>
+> `UV_INDEX_URL` 使用清华 PyPI 镜像加速依赖下载（国内网络环境必需）。
 
 > 配置完成后，在对话中直接说"解析这个 PDF"即可调用。
 
