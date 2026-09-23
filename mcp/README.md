@@ -59,6 +59,14 @@ cp .env.example .env
 | `VLM_API_KEY` | — | API Key |
 | `VLM_MODEL` | MiniMax-M3 | 默认模型 |
 | `OSS_ENABLED` | off | 是否启用 OSS 上传（可选） |
+| `OSS_PROVIDER` | aliyun | 云服务商（aliyun / aws / s3 / minio） |
+| `OSS_BUCKET` | — | 存储桶名称 |
+| `OSS_ENDPOINT` | — | 服务端点 |
+| `OSS_ACCESS_KEY` | — | Access Key |
+| `OSS_SECRET_KEY` | — | Secret Key |
+| `OSS_PREFIX` | tasks/ | 对象键前缀 |
+
+> OSS 未启用时，`include_images` 自动降级为 false，图片块仅输出 VLM 描述文本。
 
 ## 开发
 
