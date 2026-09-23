@@ -3,11 +3,6 @@
 import os
 from typing import Optional
 
-from src.controller.kb_export_controller import _build_segments, _chunk_segments
-from src.store import task_store
-from src.task_manager.task_service import create_task, run_parse
-from src.utils import oss_client
-
 
 def parse_pdf(
     file_path: str,
@@ -28,6 +23,11 @@ def parse_pdf(
         return _error("FILE_NOT_FOUND", f"文件不存在: {file_path}")
 
     # 2. 同步解析
+    from src.controller.kb_export_controller import _build_segments, _chunk_segments
+    from src.store import task_store
+    from src.task_manager.task_service import create_task, run_parse
+    from src.utils import oss_client
+
     try:
         response, pdf_path = create_task(file_bytes, os.path.basename(file_path), vlm_model or None)
     except Exception as e:
