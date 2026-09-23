@@ -16,6 +16,13 @@ from src.utils import env, vlm_models
 from src.utils.metrics import record_vlm_call
 
 # MiniMax (and some compat providers) embed thinking in <think>…</think> tags.
+__all__ = [
+    "VlmAuthError",
+    "vlm_describe",
+    "vlm_describe_chart",
+    "vlm_ocr",
+]
+
 _THINK_RE = re.compile(r"<think>.*?</think>\s*", re.DOTALL)
 
 
@@ -44,6 +51,11 @@ OCR_PROMPT = (
     "请对这张扫描件图片进行 OCR 识别，输出其中所有可读文字。"
     "尽量保持原始段落与结构，用中文输出。"
 )
+
+class VlmAuthError(RuntimeError):
+    """VLM API 认证失败 (401/403)。"""
+    pass
+
 
 _client = httpx.Client(timeout=120.0)
 
@@ -97,6 +109,8 @@ def _call_vlm(
         try:
             resp = _client.post(url, json=payload, headers=headers)
             latency = int((time.time() - t0) * 1000)
+            if resp.status_code in (401, 403):
+                raise VlmAuthError(f"VLM 认证失败 (HTTP {resp.status_code}): 请检查 VLM_API_KEY 是否正确")
             if resp.status_code in (429, 500, 502, 503, 504):
                 last_err = RuntimeError(f"HTTP {resp.status_code}")
                 final_latency = latency
@@ -118,6 +132,9 @@ def _call_vlm(
             cost = _calc_cost(cfg.model, prompt_tokens, completion_tokens)
             record_vlm_call(metrics_ctx, kind, cfg.model, latency, total_tokens, cost, attempt, True, prompt_tokens, completion_tokens)
             return content
+        except VlmAuthError:
+            record_vlm_call(metrics_ctx, kind, cfg.model, latency, 0, 0.0, attempt, False)
+            raise
         except (httpx.TimeoutException, httpx.HTTPError) as e:
             latency = int((time.time() - t0) * 1000)
             last_err = e
