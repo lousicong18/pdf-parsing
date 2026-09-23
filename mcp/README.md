@@ -46,6 +46,30 @@ uvx --from git+https://github.com/lousicong18/pdf-parsing pdf-parser-mcp
 | `overlap_tokens` | int | 否 | 50 | 块间重叠 token 数 |
 | `include_images` | bool | 否 | true | 是否上传图片到 OSS 并插入图片引用 |
 
+### 调用示例
+
+在 Claude Code / Cursor 中，配置完成后直接用自然语言调用：
+
+```
+解析 /path/to/report.pdf
+```
+
+带自定义参数：
+
+```
+解析 /path/to/report.pdf，每块 1000 tokens，重叠 100 tokens
+```
+
+```
+用 deepseek-v4-pro 模型解析 /path/to/report.pdf
+```
+
+```
+解析 /path/to/report.pdf，不上传图片
+```
+
+工具会自动将自然语言转换为对应参数调用。
+
 ### 环境变量
 
 | 变量 | 默认值 | 说明 |
